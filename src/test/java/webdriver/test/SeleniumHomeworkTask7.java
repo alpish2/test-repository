@@ -1,7 +1,8 @@
 package webdriver.test;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,10 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask7 {
 
-    public WebDriver driver;
+    public static WebDriver driver;
 
-    @Before
-    public void initDriver() {
+    @BeforeClass
+    public static void initDriver() {
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\opishcheiko\\Desktop\\selenium\\geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -31,13 +32,18 @@ public class SeleniumHomeworkTask7 {
             3) для каждой страницы проверяет наличие заголовка (то есть элемента с тегом h1)
     */
 
+
     @Test
-    public void task7_loginToAdminGoTroughTheMenuAndCheckTitle() {
+    public void task7_1loginToAdmin(){
         driver.get("http://localhost:8080/litecart/admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("login")).submit();
 
+    }
+
+    @Test
+    public void task7_2goTroughTheMenuAndCheckTitle() {
 
         List<WebElement> webElementListToGetSize = driver.findElements(By.cssSelector("li#app- a"));
         int webElementListSize = webElementListToGetSize.size();
@@ -46,7 +52,6 @@ public class SeleniumHomeworkTask7 {
         int diff;
 
         for (int i = 0; i < webElementListSize; i++) {
-            System.out.println("the beginning of for loop, i:" + i + "here:" + driver.getCurrentUrl());
             List<WebElement> webElementList = driver.findElements(By.cssSelector("li#app- a"));
             try {
                 Thread.sleep(2000);
@@ -54,47 +59,37 @@ public class SeleniumHomeworkTask7 {
                 e.printStackTrace();
             }
             webElementList.get(i).click();
-            System.out.println("click to" +  "here" + driver.getCurrentUrl());
             List<WebElement> webElementListChanged = driver.findElements(By.cssSelector("li#app- a"));
             diff = webElementListChanged.size() - webElementListSize;
-            System.out.println("difference = " + diff);
+
 
             if (diff != 0) {
-                System.out.println("inside if");
 
-                for (int j = 1; j < diff; j++) {
+                for (int j = 1; j <= diff; j++) {
                     List<WebElement> webElementListChanged2 = driver.findElements(By.cssSelector("li#app- a"));
                     webElementListChanged2.get(i + j).click();
-                    System.out.println("inside second for loop, j = " + j);
-
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("second loop after click" +  "here" + driver.getCurrentUrl());
-                    System.out.println("i:" + i + "j:" + j);
-
-
+                    Assert.assertTrue("h1 element exists on the current page: ",driver.findElement(By.cssSelector("h1")).isDisplayed());
                 }
-                driver.findElement(By.cssSelector("[title= 'Home']"));
+                driver.get("http://localhost:8080/litecart/admin/");
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Home button clicked"  + driver.getCurrentUrl());
-            }
-            diff = 0;
-            System.out.println("diff:" + diff + "i:" + i);
 
+            }
         }
 
     }
 
-    @After
-    public void quitDriver() {
-        // driver.quit();
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
     }
 
 
