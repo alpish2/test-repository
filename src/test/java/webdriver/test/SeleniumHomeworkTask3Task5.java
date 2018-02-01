@@ -1,5 +1,6 @@
 package webdriver.test;
 
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class SeleniumHomeworkTask3Task5 {
 
-
+    /*
+    Сделайте сценарий для логина в панель администрирования учебного приложения --
+       http://localhost/litecart/admin/
+    */
     @Test
     public void task3_loginToAdminPageWithIE() {
         System.setProperty("webdriver.ie.driver", "C:\\Users\\opishcheiko\\Desktop\\selenium\\IEDriverServer.exe");
@@ -22,6 +26,10 @@ public class SeleniumHomeworkTask3Task5 {
         driver.quit();
     }
 
+    /*
+Попробуйте запустить разработанный ранее сценарий логина во всех основных браузерах,
+    доступных для вашей операционной системы.
+ */
     @Test
     public void task5_loginToAdminPageWithFFesr() {
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\opishcheiko\\Desktop\\selenium\\geckodriver.exe");
