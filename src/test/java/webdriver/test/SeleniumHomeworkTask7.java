@@ -74,6 +74,7 @@ public class SeleniumHomeworkTask7 {
                         e.printStackTrace();
                     }
                     Assert.assertTrue("h1 element exists on the current page: ",driver.findElement(By.cssSelector("h1")).isDisplayed());
+
                 }
                 driver.get("http://localhost:8080/litecart/admin/");
                 try {

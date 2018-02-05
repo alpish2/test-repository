@@ -44,6 +44,8 @@ public class task8 {
        System.out.println("size" + listSize);
        for (int i = 0; i < listSize; i++) {
            Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
+           int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
+           Assert.assertEquals( stickerCount,1);
            try {
                Thread.sleep(500);
            } catch (InterruptedException e) {
@@ -62,6 +64,8 @@ public class task8 {
         int listSize = secondDiv.size();
         for (int i = 0; i < listSize; i++) {
             Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
+            int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
+            Assert.assertEquals( stickerCount,1);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -81,6 +85,8 @@ public class task8 {
         int listSize = secondDiv.size();
         for (int i = 0; i < listSize; i++) {
             Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
+            int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
+           Assert.assertEquals( stickerCount,1);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {

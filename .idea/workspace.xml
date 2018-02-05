@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f08f6d17-ee32-44b9-b0b7-3cc344c42b5a" name="Default" comment="- task 3 and task 5 completed (get login page with IE11 and FF ESR)&#10;- class for task 7 created">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/task8.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/task8.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/task8.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+            <state relative-caret-position="481">
+              <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -37,25 +37,25 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="281">
-              <caret line="82" column="17" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="82" selection-end-column="17" />
+              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3172#3173#0" expanded="true" />
-                <element signature="e#3201#3202#0" expanded="true" />
+                <element signature="e#3173#3174#0" expanded="true" />
+                <element signature="e#3202#3203#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task8.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="task8.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/task8.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+            <state relative-caret-position="781">
+              <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3138#3139#0" expanded="true" />
-                <element signature="e#3167#3168#0" expanded="true" />
+                <element signature="e#3585#3586#0" expanded="true" />
+                <element signature="e#3614#3615#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,7 +100,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="202" />
     <option name="y" value="-22" />
     <option name="width" value="1688" />
@@ -430,12 +430,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="task8 - 2018.02.01 at 18h 35m 35s.xml">
-      <configuration name="task8" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="task8 - 2018.02.01 at 18h 37m 07s.xml">
-      <configuration name="task8" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="task8 - 2018.02.02 at 14h 29m 58s.xml">
       <configuration name="task8" configurationId="JUnit" />
     </history-entry>
@@ -460,9 +454,15 @@
     <history-entry file="task8 - 2018.02.02 at 17h 57m 39s.xml">
       <configuration name="task8" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="task8 - 2018.02.05 at 11h 50m 32s.xml">
+      <configuration name="task8" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="task8 - 2018.02.05 at 11h 51m 53s.xml">
+      <configuration name="task8" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -884,35 +884,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
-          <caret line="82" column="17" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="82" selection-end-column="17" />
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3172#3173#0" expanded="true" />
-            <element signature="e#3201#3202#0" expanded="true" />
+            <element signature="e#3173#3174#0" expanded="true" />
+            <element signature="e#3202#3203#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/task8.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        <state relative-caret-position="781">
+          <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3138#3139#0" expanded="true" />
-            <element signature="e#3167#3168#0" expanded="true" />
+            <element signature="e#3585#3586#0" expanded="true" />
+            <element signature="e#3614#3615#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
