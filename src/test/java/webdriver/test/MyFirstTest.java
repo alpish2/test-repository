@@ -78,7 +78,7 @@ public class MyFirstTest {
         List<WebElement> radioButtons = driver.findElements(By.name("sex"));
         boolean ButtonIsSelected = false;
         ButtonIsSelected = radioButtons.get(0).isSelected();
-        if (ButtonIsSelected == true) radioButtons.get(1).click();
+        if (ButtonIsSelected) radioButtons.get(1).click();
         else radioButtons.get(0).click();
     }
 

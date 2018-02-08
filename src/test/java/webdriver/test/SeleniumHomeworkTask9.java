@@ -8,6 +8,7 @@ package webdriver.test;
             2) на странице http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones
     зайти в каждую из стран и проверить, что зоны расположены в алфавитном порядке*/
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -117,6 +118,11 @@ public class SeleniumHomeworkTask9 {
             Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
         }
         driver.close();
+    }
+
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
     }
 
 }

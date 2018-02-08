@@ -7,11 +7,13 @@ package webdriver.test;
 //        4) и ещё раз выход.
 //        В форме регистрации есть капча, её нужно отключить в админке учебного приложения на вкладке Settings -> Security.
 
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +29,7 @@ public class SeleniumHomeworkTask11 {
         driver.get(link);
     }
 
-    public static void login( String link, String username, String password) {
+    public static void login(String link, String username, String password) {
         initDriver(link);
         driver.findElement(By.name("password")).sendKeys(username);
         driver.findElement(By.name("username")).sendKeys(password);
@@ -37,28 +39,44 @@ public class SeleniumHomeworkTask11 {
 
     @Test
     public void registerNewUserLogInLogOut() {
+
+        turnOffCapchaSetting();
+
         initDriver("http://localhost:8080/litecart/en/");
         driver.findElement(By.cssSelector("li.account a.dropdown-toggle")).click();
         driver.findElement(By.cssSelector("ul.dropdown-menu a[href='http://localhost:8080/litecart/en/create_account']")).click();
-        findCapchaSetting();
-        driver.findElement(By.name("firstname")).sendKeys("sasha");
-        driver.findElement(By.name("lastname")).sendKeys("pish");
-        driver.findElement(By.name(" country_code"));
-        driver.findElement(By.name(" zone_code"));
-        driver.findElement(By.name("email")).sendKeys("sashapish@sdl.com");
-        driver.findElement(By.name("password")).sendKeys("sasha");
-        driver.findElement(By.name("confirmed_password")).sendKeys("sasha");
-        if(!driver.findElement(By.name("newsletter")).isSelected()) driver.findElement(By.name("newsletter")).click();
-        driver.findElement(By.name(" create_account")).click();
+        WebElement formElement = driver.findElement(By.cssSelector("div#box-create-account"));
+        formElement.findElement(By.name("firstname")).sendKeys("sasha");
+        formElement.findElement(By.name("lastname")).sendKeys("pish");
+        WebElement countryCode = formElement.findElement(By.name("country_code"));
+        Select oselect1 = new Select(countryCode);
+        oselect1.selectByValue("US");
+
+
+        if (driver.findElement(By.cssSelector("select[name='country_code'] option[value='US']")).isSelected()) {
+            WebElement zoneCode = formElement.findElement(By.name("zone_code"));
+            Select oselect2 = new Select(zoneCode);
+            oselect2.selectByIndex(3);
+        }
+
+        formElement.findElement(By.name("email")).sendKeys("sashapish5@sdl.com");
+        formElement.findElement(By.name("password")).sendKeys("sasha");
+        formElement.findElement(By.name("confirmed_password")).sendKeys("sasha");
+        if (!formElement.findElement(By.name("newsletter")).isSelected())
+            formElement.findElement(By.name("newsletter")).click();
+        formElement.findElement(By.name("create_account")).click();
         driver.findElement(By.cssSelector("li.account a.dropdown-toggle")).click();
         driver.findElement(By.cssSelector("ul.dropdown-menu a[href='http://localhost:8080/litecart/en/logout']")).click();
-        login("http://localhost:8080/litecart/en/","sashapish@sdl.com", "sasha");
+        driver.findElement(By.cssSelector("li.account a.dropdown-toggle")).click();
+        driver.findElement(By.cssSelector("ul.dropdown-menu [name='email']")).sendKeys("sashapish@sdl.com");
+        driver.findElement(By.cssSelector("ul.dropdown-menu [name='password']")).sendKeys("sasha");
+        driver.findElement(By.cssSelector("ul.dropdown-menu [name='login']")).click();
         driver.findElement(By.cssSelector("li.account a.dropdown-toggle")).click();
         driver.findElement(By.cssSelector("ul.dropdown-menu a[href='http://localhost:8080/litecart/en/logout']")).click();
 
     }
 
-    public void findCapchaSetting() {
+    public void turnOffCapchaSetting() {
         login("http://localhost:8080/litecart/admin/?app=settings&doc=security", "admin", "admin");
         try {
             Thread.sleep(500);
@@ -72,42 +90,37 @@ public class SeleniumHomeworkTask11 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (elementList.get(i).getText().equals("CAPTCHA")){turnOffCapcha(i);
-            System.out.println("capcha turned off");}
+            if (elementList.get(i).getText().equals("CAPTCHA")) {
+                List<WebElement> elementList2 = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[3]/a"));
+                System.out.println(elementList2.get(i).getText());
+                elementList2.get(i).click();
+                List<WebElement> trueFalse = driver.findElements(By.cssSelector("div.btn-group label.btn.active"));
+                for (int j = 0; j < trueFalse.size(); j++) {
+                    if (trueFalse.get(j).equals("True")) {
+                        trueFalse.get(j + 1).click();
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        driver.findElement(By.cssSelector("div.btn-group button[value='Save']")).click();
+                        System.out.println("saved");
+                        break;
+                    } else {
+                        driver.findElement(By.cssSelector("div.btn-group button[value='Cancel']")).click();
+                        System.out.println("canceled");
+                    }
+                }
+                System.out.println("capcha is turned off");
+            }
+
         }
 
-
+        driver.close();
     }
 
-    public void turnOffCapcha(int i) {
-        login("http://localhost:8080/litecart/admin/?app=settings&doc=security", "admin", "admin");
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<WebElement> elementList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[3]/a"));
-        System.out.println(elementList.get(i).getText());
-        elementList.get(i).click();
-        List<WebElement> trueFalse = driver.findElements(By.cssSelector("div.btn-group label.btn.active"));
-        for (int j = 0; j < trueFalse.size(); j++) {
-            if (trueFalse.get(j).equals("True")) {
-                trueFalse.get(j + 1).click();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                driver.findElement(By.cssSelector("div.btn-group button[value='Save']")).click();
-                System.out.println("saved");
-                break;
-            } else {
-                driver.findElement(By.cssSelector("div.btn-group button[value='Cancel']")).click();
-                System.out.println("canceled");
-            }
-            }
-        }
-
-
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
 }
