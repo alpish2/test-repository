@@ -6,6 +6,7 @@ package webdriver.test;
     2.   Попробуйте запустить разработанный ранее сценарий логина во всех основных браузерах,
     доступных для вашей операционной системы.
     */
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,10 +31,9 @@ public class SeleniumHomeworkTask3Task5 {
 
     @Test
     public void loginToAdminPageWithFFesr() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\opishcheiko\\Desktop\\selenium\\geckodriver.exe");
-        FirefoxOptions options = new FirefoxOptions();
-        options.setCapability(FirefoxDriver.MARIONETTE, false);
-        WebDriver driver = new FirefoxDriver(options);
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setCapability("marionette", true);
+        WebDriver driver = new FirefoxDriver(firefoxOptions);
         driver.get("http://localhost:8080/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
