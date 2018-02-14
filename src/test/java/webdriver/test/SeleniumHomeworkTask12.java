@@ -9,6 +9,7 @@ package webdriver.test;
 */
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -55,9 +56,9 @@ public class SeleniumHomeworkTask12 {
             }
         }
 
-       //select
-        List <WebElement> selectList = driver.findElements(By.cssSelector("label.btn.btn-default"));
-        for (int i=0;i<selectList.size();i++){
+        //select
+        List<WebElement> selectList = driver.findElements(By.cssSelector("label.btn.btn-default"));
+        for (int i = 0; i < selectList.size(); i++) {
             if (selectList.get(i).getText().equals("Enabled")) selectList.get(i).click();
         }
 
@@ -74,11 +75,11 @@ public class SeleniumHomeworkTask12 {
 
         driver.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys("1995-01-01");
 
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(50);
+        int randomNumber = generateRandomNum();
+        String productName = "Oleksandra" + randomNumber;
 
         //textfields
-        driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys("Oleksandra"+ randomNumber);
+        driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys(productName);
         driver.findElement(By.cssSelector("input[name='code']")).sendKeys("123456");
         driver.findElement(By.cssSelector("input[name='sku']")).sendKeys("123456");
         driver.findElement(By.cssSelector("input[name='mpn']")).sendKeys("qwertt");
@@ -92,17 +93,34 @@ public class SeleniumHomeworkTask12 {
         oSelect.selectByIndex(1);
 
         driver.findElement(By.cssSelector("button[name='save']")).click();
-
+        checkNewProduct(productName, driver);
     }
 
-    @Test
-    public void checkNewProduct(){
-        login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
+
+    public void checkNewProduct(String productName, WebDriver driver) {
+        // login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        int temp = 0;
+        List<WebElement> productList = driver.findElements(By.cssSelector("table tr td a"));
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getText().equals(productName)) {
+                temp++;
+                break;
+            }
+        }
+        Assert.assertEquals(temp, 1);
+    }
+
+
+    public int generateRandomNum() {
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(50);
+
+        return randomNumber;
     }
 
     @AfterClass
