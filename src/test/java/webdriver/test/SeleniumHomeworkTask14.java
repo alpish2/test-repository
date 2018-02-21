@@ -40,7 +40,7 @@ public class SeleniumHomeworkTask14 {
     }
 
     @Test
-    public void checkBlankPages() {
+    public void checkIfNewWindowsOpen() {
         login("http://localhost:8080/litecart/admin/?app=countries&doc=countries", "admin", "admin");
         try {
             Thread.sleep(500);
