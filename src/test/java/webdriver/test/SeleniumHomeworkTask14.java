@@ -31,7 +31,6 @@ public class SeleniumHomeworkTask14 {
         driver.get(link);
     }
 
-
     public static void login(String link, String username, String password) {
         initDriver(link);
         driver.findElement(By.name("password")).sendKeys(username);
@@ -88,7 +87,6 @@ public class SeleniumHomeworkTask14 {
 
         return randomNum;
     }
-
 
     @AfterClass
     public static void quitDriver() {
