@@ -48,6 +48,15 @@ public class SeleniumHomeworkTask17 {
     @Test
     public void checkIfLogsMessageExists() {
         login("  http://localhost:8080/litecart/admin/?app=catalog&doc=catalog&category_id=1", "admin", "admin");
+        openAndCloseEachProductPage(driver);
+        LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+        for (LogEntry entry : logEntries) {
+            if (!entry.getMessage().equals("")) System.out.println("browser message: " + entry.getMessage());
+            Assert.assertTrue(entry.getMessage().equals(""));
+        }
+    }
+
+    public void openAndCloseEachProductPage(WebDriver driver) {
         List<WebElement> productList = driver.findElements(By.xpath("//*[@id=\"main\"]/form/table/tbody//td[3]/a"));
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getText().equals("Subcategory")) {
@@ -60,11 +69,6 @@ public class SeleniumHomeworkTask17 {
             productList.get(i).click();
             driver.findElement(By.name("cancel")).click();
             productList = driver.findElements(By.xpath("//*[@id=\"main\"]/form/table/tbody//td[3]/a"));
-        }
-        LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
-        for (LogEntry entry : logEntries) {
-            if (!entry.getMessage().equals("")) System.out.println("browser message: " + entry.getMessage());
-            Assert.assertTrue(entry.getMessage().equals(""));
         }
     }
 

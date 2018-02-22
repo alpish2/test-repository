@@ -34,7 +34,7 @@ public class SeleniumHomeworkTask18 {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(link);
     }
-    
+
     @Test
     public void checkIfProxyIsUsed() {
         initDriver("  http://google.com");

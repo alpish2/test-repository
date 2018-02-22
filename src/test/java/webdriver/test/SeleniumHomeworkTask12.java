@@ -43,6 +43,15 @@ public class SeleniumHomeworkTask12 {
     @Test
     public void addNewProductCatalog() {
         login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
+        openNewProductPage(driver);
+        String productName = generateRandomNumForName();
+        fillTheForm(driver, productName);
+        driver.findElement(By.cssSelector("button[name='save']")).click();
+        checkNewProduct(productName, driver);
+    }
+
+    public void openNewProductPage(WebDriver driver) {
+
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -56,6 +65,9 @@ public class SeleniumHomeworkTask12 {
             }
         }
 
+    }
+
+    public void fillTheForm(WebDriver driver, String productName) {
         //select
         List<WebElement> selectList = driver.findElements(By.cssSelector("label.btn.btn-default"));
         for (int i = 0; i < selectList.size(); i++) {
@@ -75,8 +87,6 @@ public class SeleniumHomeworkTask12 {
 
         driver.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys("1995-01-01");
 
-        int randomNumber = generateRandomNum();
-        String productName = "Oleksandra" + randomNumber;
 
         //textfields
         driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys(productName);
@@ -92,10 +102,8 @@ public class SeleniumHomeworkTask12 {
         Select oSelect = new Select(dropdown);
         oSelect.selectByIndex(1);
 
-        driver.findElement(By.cssSelector("button[name='save']")).click();
-        checkNewProduct(productName, driver);
-    }
 
+    }
 
     public void checkNewProduct(String productName, WebDriver driver) {
         // login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
@@ -115,12 +123,11 @@ public class SeleniumHomeworkTask12 {
         Assert.assertEquals(temp, 1);
     }
 
-
-    public int generateRandomNum() {
+    public String generateRandomNumForName() {
         Random rand = new Random();
         int randomNumber = rand.nextInt(50);
-
-        return randomNumber;
+        String productName = "Oleksandra" + randomNumber;
+        return productName;
     }
 
     @AfterClass

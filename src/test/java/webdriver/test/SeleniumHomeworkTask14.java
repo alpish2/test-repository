@@ -41,6 +41,14 @@ public class SeleniumHomeworkTask14 {
     @Test
     public void checkIfNewWindowsOpen() {
         login("http://localhost:8080/litecart/admin/?app=countries&doc=countries", "admin", "admin");
+        openCountryPage(driver);
+        List<WebElement> linksList = driver.findElements(By.cssSelector("label a[target]"));
+        String startWindow = driver.getWindowHandle();
+        SwitchToWindowAndCloseIt(driver, linksList, startWindow);
+
+    }
+
+    public void openCountryPage(WebDriver driver) {
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
@@ -54,10 +62,6 @@ public class SeleniumHomeworkTask14 {
             e.printStackTrace();
         }
         countryList.get(generateRandomNum()).click();
-
-        List<WebElement> linksList = driver.findElements(By.cssSelector("label a[target]"));
-        String startWindow = driver.getWindowHandle();
-        SwitchToWindowAndCloseIt(driver, linksList, startWindow);
 
     }
 
