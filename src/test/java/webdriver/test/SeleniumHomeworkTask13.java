@@ -47,7 +47,7 @@ public class SeleniumHomeworkTask13 {
             List<WebElement> products = driver.findElements(By.xpath(".//*[@id='box-popular-products']/div/div"));
 
             products.get(i).click();
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             driver.findElement(By.cssSelector("div#view-full-page a")).click();
             String quantityBefore = driver.findElement(By.cssSelector("span.quantity")).getText();
             int quantityBeforeInt = Integer.parseInt(quantityBefore);
@@ -56,11 +56,10 @@ public class SeleniumHomeworkTask13 {
                 Select oSelect = new Select(driver.findElement(By.name("options[Size]")));
                 oSelect.selectByValue("Small");
             }
-
             driver.findElement(By.cssSelector("button.btn-success")).click();
-            driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             String quantityAfter = Integer.toString(i + 1);
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 3);
             wait.until(ExpectedConditions.textToBe(By.cssSelector("span.quantity"), quantityAfter));
 
             int quantityAfterInt = Integer.parseInt(quantityAfter);
@@ -76,7 +75,7 @@ public class SeleniumHomeworkTask13 {
         List<WebElement> deleteIcons = driver.findElements(By.name("remove_cart_item"));
         for (int i = 0; i < deleteIcons.size(); i++) {
             deleteIcons.get(i).click();
-
+            deleteIcons = driver.findElements(By.name("remove_cart_item"));
         }
     }
 
