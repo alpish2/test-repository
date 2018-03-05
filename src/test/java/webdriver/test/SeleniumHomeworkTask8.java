@@ -10,87 +10,57 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask8 {
+public class SeleniumHomeworkTask8 extends DriverInitialization {
 
-
-    public static WebDriver driver;
-
-
-    public static void initDriver() {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://localhost:8080/litecart/en/");
-    }
-
+    public String selectorForCampaignProducts = "div#box-campaign-products";
+    public String selectorForPopularProducts = "div#box-popular-products";
+    public String selectorForLatestProducts = "div#box-latest-products";
 
     @Test
     public void checkCampaignProductsSticker() {
-        initDriver();
-        driver.findElement(By.linkText("Campaign Products")).click();
-        WebElement firstDiv = driver.findElement(By.cssSelector("div#box-campaign-products"));
-
-        List<WebElement> secondDiv = firstDiv.findElements(By.cssSelector("div.image-wrapper"));
-        int listSize = secondDiv.size();
-        for (int i = 0; i < listSize; i++) {
-            Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
-            int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
-            Assert.assertEquals(stickerCount, 1);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        initFFDriver();
+        BasicActions.getMainPage(driver);
+        checkSticker(setTab(driver, "Campaign Products", selectorForCampaignProducts));
 
     }
 
     @Test
     public void checkPopularProductsSticker() {
-        initDriver();
-        driver.findElement(By.linkText("Popular Products")).click();
-        WebElement firstDiv = driver.findElement(By.cssSelector("div#box-popular-products"));
-
-        List<WebElement> secondDiv = firstDiv.findElements(By.cssSelector("div.image-wrapper"));
-        int listSize = secondDiv.size();
-        for (int i = 0; i < listSize; i++) {
-            Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
-            int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
-            Assert.assertEquals(stickerCount, 1);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-
+        initFFDriver();
+        BasicActions.getMainPage(driver);
+        checkSticker(setTab(driver, "Popular Products", selectorForPopularProducts));
     }
 
     @Test
     public void checkLatestProductsSticker() {
-        initDriver();
-        driver.findElement(By.linkText("Latest Products")).click();
-        WebElement firstDiv = driver.findElement(By.cssSelector("div#box-latest-products"));
+        initFFDriver();
+        BasicActions.getMainPage(driver);
+        checkSticker(setTab(driver, "Latest Products", selectorForLatestProducts));
+    }
+
+    public WebElement setTab(WebDriver driver, String tabName, String selector) {
+        driver.findElement(By.linkText(tabName)).click();
+        WebElement firstDiv = driver.findElement(By.cssSelector(selector));
+        return firstDiv;
+    }
+
+    public void checkSticker(WebElement firstDiv) {
         List<WebElement> secondDiv = firstDiv.findElements(By.cssSelector("div.image-wrapper"));
         int listSize = secondDiv.size();
         for (int i = 0; i < listSize; i++) {
-            Assert.assertTrue(secondDiv.get(i).findElement(By.cssSelector("div.sticker")).isDisplayed());
-            int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
-            Assert.assertEquals(stickerCount, 1);
+            if (secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size() != 0) {
+                int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
+                Assert.assertEquals(stickerCount, 1);
+            }
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
     }
 

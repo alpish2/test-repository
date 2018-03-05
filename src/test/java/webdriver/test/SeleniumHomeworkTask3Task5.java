@@ -7,39 +7,27 @@ package webdriver.test;
     доступных для вашей операционной системы.
     */
 
+import org.junit.AfterClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
-public class SeleniumHomeworkTask3Task5 {
+public class SeleniumHomeworkTask3Task5 extends DriverInitialization {
 
     @Test
     public void loginToAdminPageWithIE() {
-        System.setProperty("webdriver.ie.driver", "C:\\Users\\opishcheiko\\Desktop\\selenium\\IEDriverServer.exe");
-        WebDriver driver = new InternetExplorerDriver();
-        driver.get("http://localhost:8080/litecart/admin/");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("remember_me")).click();
-        driver.findElement(By.name("login")).submit();
-        driver.quit();
+        initIEDriver();
+        BasicActions.getAdminPage(driver);
+        BasicActions.loginAsAdmin(driver);
     }
-
 
     @Test
     public void loginToAdminPageWithFFesr() {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        WebDriver driver = new FirefoxDriver(firefoxOptions);
-        driver.get("http://localhost:8080/litecart/admin/");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("remember_me")).click();
-        driver.findElement(By.name("login")).submit();
-        driver.quit();
+        initFFDriver();
+        BasicActions.getAdminPage(driver);
+        BasicActions.loginAsAdmin(driver);
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
 }

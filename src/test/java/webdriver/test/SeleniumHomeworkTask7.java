@@ -12,34 +12,19 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
-public class SeleniumHomeworkTask7 {
-
-    public static WebDriver driver;
-
-    public void loginToAdminAndGetPage(String link) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("login")).submit();
-
-    }
+public class SeleniumHomeworkTask7  extends DriverInitialization{
 
     @Test
     public void goTroughTheMenuAndCheckTitle() {
-        loginToAdminAndGetPage("http://localhost:8080/litecart/admin/");
+        initFFDriver();
+        BasicActions.getAdminPage(driver);
+        BasicActions.loginAsAdmin(driver);
+
         List<WebElement> webElementListToGetSize = driver.findElements(By.cssSelector("li#app- a"));
         int webElementListSize = webElementListToGetSize.size();
         System.out.println("initial SIZE:" + webElementListSize);
@@ -71,7 +56,7 @@ public class SeleniumHomeworkTask7 {
                     Assert.assertTrue("h1 element exists on the current page: ", driver.findElement(By.cssSelector("h1")).isDisplayed());
 
                 }
-                driver.get("http://localhost:8080/litecart/admin/");
+                BasicActions.getAdminPage(driver);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {

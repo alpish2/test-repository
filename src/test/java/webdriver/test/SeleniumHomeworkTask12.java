@@ -14,49 +14,29 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask12 {
-    public static WebDriver driver;
+public class SeleniumHomeworkTask12 extends DriverInitialization {
 
-    public static void initDriver(String link) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-    }
-
-    public static void login(String link, String username, String password) {
-        initDriver(link);
-        driver.findElement(By.name("password")).sendKeys(username);
-        driver.findElement(By.name("username")).sendKeys(password);
-        driver.findElement(By.name("login")).submit();
-    }
 
     @Test
     public void addNewProductCatalog() {
-        login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
+        initFFDriver();
+        BasicActions.getCatalogPage(driver);
         openNewProductPage(driver);
         String productName = generateRandomNumForName();
         fillTheForm(driver, productName);
-        driver.findElement(By.cssSelector("button[name='save']")).click();
+        saveForm(driver);
         checkNewProduct(productName, driver);
     }
 
     public void openNewProductPage(WebDriver driver) {
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<WebElement> buttonList = driver.findElements(By.cssSelector("ul.list-inline.pull-right a"));
         for (int i = 0; i < buttonList.size(); i++) {
             if (buttonList.get(i).getText().equals("Add New Product")) {
@@ -84,17 +64,23 @@ public class SeleniumHomeworkTask12 {
 
         //date
         driver.findElement(By.cssSelector("input[name='date_valid_from']")).sendKeys("1991-01-01");
-
         driver.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys("1995-01-01");
 
 
         //textfields
+        driver.findElement(By.cssSelector("input[name='name[en]']")).clear();
         driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys(productName);
+        driver.findElement(By.cssSelector("input[name='code']")).clear();
         driver.findElement(By.cssSelector("input[name='code']")).sendKeys("123456");
+        driver.findElement(By.cssSelector("input[name='sku']")).clear();
         driver.findElement(By.cssSelector("input[name='sku']")).sendKeys("123456");
+        driver.findElement(By.cssSelector("input[name='mpn']")).clear();
         driver.findElement(By.cssSelector("input[name='mpn']")).sendKeys("qwertt");
+        driver.findElement(By.cssSelector("input[name='gtin']")).clear();
         driver.findElement(By.cssSelector("input[name='gtin']")).sendKeys("q1w2e3r36");
+        driver.findElement(By.cssSelector("input[name='taric']")).clear();
         driver.findElement(By.cssSelector("input[name='taric']")).sendKeys("1!!@qwt");
+        driver.findElement(By.cssSelector("input[name='keywords']")).clear();
         driver.findElement(By.cssSelector("input[name='keywords']")).sendKeys("QWERTY");
 
         //dropdown
@@ -106,12 +92,8 @@ public class SeleniumHomeworkTask12 {
     }
 
     public void checkNewProduct(String productName, WebDriver driver) {
-        // login("http://localhost:8080/litecart/admin/?app=catalog&doc=catalog", "admin", "admin");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //login to catalog
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         int temp = 0;
         List<WebElement> productList = driver.findElements(By.cssSelector("table tr td a"));
         for (int i = 0; i < productList.size(); i++) {
@@ -128,6 +110,10 @@ public class SeleniumHomeworkTask12 {
         int randomNumber = rand.nextInt(50);
         String productName = "Oleksandra" + randomNumber;
         return productName;
+    }
+
+    public void saveForm(WebDriver driver) {
+        driver.findElement(By.cssSelector("button[name='save']")).click();
     }
 
     @AfterClass

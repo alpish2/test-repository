@@ -16,30 +16,17 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask10 {
-
-    public static WebDriver driver;
-
-    public static void initDriver() {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://localhost:8080/litecart/en/");
-    }
+public class SeleniumHomeworkTask10 extends DriverInitialization {
 
     @Test
-    public void checkEquivalenceOfMainPageAndProductPage() {
-        initDriver();
-        driver.get(" http://localhost:8080/litecart/en/");
+    public void checkEquivalenceOfMainPageAndProductPage () {
+        initFFDriver();
+        BasicActions.getMainPage(driver);
         driver.findElement(By.linkText("Campaign Products")).click();
         List<WebElement> elementListMainPage = driver.findElements(By.cssSelector("div#box-campaign-products a"));
         String titleMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.name")).getText();
@@ -57,11 +44,7 @@ public class SeleniumHomeworkTask10 {
 
         elementListMainPage.get(0).click();
 
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement elementProductPage = driver.findElement(By.cssSelector("div.featherlight-content"));
         String titleProductPage = elementProductPage.findElement(By.cssSelector("div.row h1.title")).getText();
 

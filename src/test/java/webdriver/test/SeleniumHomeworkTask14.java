@@ -12,35 +12,18 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask14 {
-    public static WebDriver driver;
-
-    public static void initDriver(String link) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-    }
-
-    public static void login(String link, String username, String password) {
-        initDriver(link);
-        driver.findElement(By.name("password")).sendKeys(username);
-        driver.findElement(By.name("username")).sendKeys(password);
-        driver.findElement(By.name("login")).submit();
-    }
+public class SeleniumHomeworkTask14 extends DriverInitialization {
 
     @Test
     public void checkIfNewWindowsOpen() {
-        login("http://localhost:8080/litecart/admin/?app=countries&doc=countries", "admin", "admin");
+        initFFDriver();
+        BasicActions.getCountriesPage(driver);
         openCountryPage(driver);
         List<WebElement> linksList = driver.findElements(By.cssSelector("label a[target]"));
         String startWindow = driver.getWindowHandle();
@@ -49,18 +32,10 @@ public class SeleniumHomeworkTask14 {
     }
 
     public void openCountryPage(WebDriver driver) {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         List<WebElement> countryList = driver.findElements(By.cssSelector("a[title='Edit']"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         countryList.get(generateRandomNum()).click();
 
     }

@@ -8,13 +8,12 @@ package webdriver.test;
 //        5) открыть корзину (в правом верхнем углу кликнуть по ссылке Checkout)
 //        6) удалить все товары из корзины один за другим, после каждого удаления подождать, пока внизу обновится таблица
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,20 +21,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask13 {
-    public static WebDriver driver;
-
-    public static void initDriver(String link) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-    }
+public class SeleniumHomeworkTask13 extends DriverInitialization {
 
     @Test
     public void shoppingCartAddRemove() {
-        initDriver("http://localhost:8080/litecart/en/");
+        initFFDriver();
+        BasicActions.getMainPage(driver);
         addProductsToCart(driver);
         removeProductsFromCart(driver);
     }
@@ -77,6 +68,11 @@ public class SeleniumHomeworkTask13 {
             deleteIcons.get(i).click();
             deleteIcons = driver.findElements(By.name("remove_cart_item"));
         }
+    }
+
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
     }
 
 }

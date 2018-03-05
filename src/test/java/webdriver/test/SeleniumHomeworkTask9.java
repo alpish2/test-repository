@@ -14,106 +14,61 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask9 {
+public class SeleniumHomeworkTask9 extends DriverInitialization {
 
-
-    public static WebDriver driver;
     String countryWithZones;
 
-
-    public void loginToAdminAndGetPage(String link) {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("login")).submit();
-
-    }
-
     @Test
-    public void forCountriesCheckIfOrderIsAlphabetic() {
-        loginToAdminAndGetPage("http://localhost:8080/litecart/admin/?app=countries&doc=countries");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void forCountriesCheckIfOrderIsAlphabetic() throws InterruptedException {
+        initFFDriver();
+        BasicActions.getCountriesPage(driver);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        List<WebElement> elementList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[5]//a"));
+        List<WebElement> countries = BasicActions.getCountriesList(driver);
 
-        System.out.println("size1=" + elementList.size());
-
-        for (int i = 0; i < elementList.size() - 1; i++) {
-            String firstElement = elementList.get(i).getText();
-            String secondElement = elementList.get(i + 1).getText();
+        for (int i = 0; i < countries.size() - 1; i++) {
+            String firstElement = countries.get(i).getText();
+            String secondElement = countries.get(i + 1).getText();
             Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
 
         }
     }
 
     @Test
-    public void forZonesBiggerThanZeroCheckIfOrderIsAlphabetic() {
-        loginToAdminAndGetPage("http://localhost:8080/litecart/admin/?app=countries&doc=countries");
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        List<WebElement> countryList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[5]//a"));
-        List<WebElement> zoneCountList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[6]"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("size1=" + zoneCountList.size());
-
-        for (int i = 0; i < zoneCountList.size(); i++) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (zoneCountList.get(i).getText().compareTo("0") != 0) {
-
-                countryWithZones = countryList.get(i).getAttribute("href");
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                checkOrder();
-            }
-
-
-        }
+    public void forZonesBiggerThanZeroCheckIfOrderIsAlphabetic() throws InterruptedException {
+        initFFDriver();
+        BasicActions.getCountriesPage(driver);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        List<WebElement> countryList = BasicActions.getCountriesList(driver);
+        List<WebElement> zoneCountList = BasicActions.getCountriesZonesList(driver);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        checkIfNumberOfZonesIsNotNull(driver, countryList, zoneCountList);
 
     }
 
+    public void checkIfNumberOfZonesIsNotNull(WebDriver driver, List<WebElement> countryList, List<WebElement> zoneCountList) throws InterruptedException {
+        for (int i = 0; i < zoneCountList.size(); i++) {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            if (zoneCountList.get(i).getText().compareTo("0") != 0) {
+                countryWithZones = countryList.get(i).getAttribute("href");
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                checkOrder(countryWithZones);
+            }
 
-    public void checkOrder() {
-        loginToAdminAndGetPage(countryWithZones);
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
         }
+    }
+
+    public void checkOrder(String link) throws InterruptedException {
+        initFFDriver();
+        BasicActions.getPageByLinkAsAdmin(driver, link);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<WebElement> zoneList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[3]/input"));
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("size23:" + zoneList.size());
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         for (int i = 0; i < zoneList.size() - 1; i++) {
             String firstElement = zoneList.get(i).getAttribute("value");
             String secondElement = zoneList.get(i + 1).getAttribute("value");

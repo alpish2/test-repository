@@ -12,38 +12,20 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class SeleniumHomeworkTask11 {
-    public static WebDriver driver;
+public class SeleniumHomeworkTask11 extends  DriverInitialization {
 
-    public static void initDriver(String link) {
-
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setCapability("marionette", true);
-        driver = new FirefoxDriver(firefoxOptions);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(link);
-    }
-
-    public static void login(String link, String username, String password) {
-        initDriver(link);
-        driver.findElement(By.name("password")).sendKeys(username);
-        driver.findElement(By.name("username")).sendKeys(password);
-        driver.findElement(By.name("login")).submit();
-
-    }
+    String link = "http://localhost:8088/litecart/admin/?app=settings&doc=security";
 
     @Test
     public void registerNewUser() {
+        initFFDriver();
         User user = new User("sasha", "pish", "sashapish6@sdl.com", "sasha", "sasha");
         turnOffCapchaSetting();
-        initDriver("http://localhost:8080/litecart/en/");
+        BasicActions.getMainPage(driver);
         openCreateAccountPage(driver);
         fillTheFormWithData(driver, user);
         submitRegistrationForm(driver);
@@ -53,7 +35,7 @@ public class SeleniumHomeworkTask11 {
     }
 
     public void turnOffCapchaSetting() {
-        login("http://localhost:8080/litecart/admin/?app=settings&doc=security", "admin", "admin");
+      BasicActions.getPageByLinkAsAdmin(driver,link);
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
