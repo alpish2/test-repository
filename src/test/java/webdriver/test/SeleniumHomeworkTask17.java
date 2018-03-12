@@ -22,8 +22,9 @@ public class SeleniumHomeworkTask17 extends DriverInitialization{
 
     @Test
     public void checkIfLogsMessageExists() {
+        String link="http://localhost:8080/litecart/admin/?app=catalog&doc=catalog&category_id=1";
         initChromeDriver();
-        GetPageActions.getPageByLinkAsAdmin(driver, "http://localhost:8080/litecart/admin/?app=catalog&doc=catalog&category_id=1");
+        GetPageActions.getPageByLinkAsAdmin(driver, link);
         openAndCloseEachProductPage(driver);
         LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
         for (LogEntry entry : logEntries) {

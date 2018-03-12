@@ -6,6 +6,7 @@ package webdriver.test;
 
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +38,9 @@ public class SeleniumHomeworkTask18 {
 
     @Test
     public void checkIfProxyIsUsed() {
-        initDriver("  http://google.com");
+        String link = "http://google.com";
+        initDriver(link);
+        Assert.assertTrue(driver.getCurrentUrl().equals(link));
     }
 
     @AfterClass

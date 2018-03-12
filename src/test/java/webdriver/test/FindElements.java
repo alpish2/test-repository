@@ -61,7 +61,7 @@ public class FindElements {
     }
 
     public static WebElement findSaveButton(WebDriver driver) {
-        return driver.findElement(By.cssSelector("div.btn-group button[value='Save']"));
+        return driver.findElement(By.cssSelector("button[value='Save']"));
 
     }
 
@@ -102,5 +102,23 @@ public class FindElements {
         return  driver.findElements(By.cssSelector("ul.list-inline.pull-right a"));
     }
 
+    public static WebElement findAddToCartButton (WebDriver driver) {
+        return   driver.findElement(By.cssSelector("button.btn-success"));
+    }
+
+    public static WebElement findCart (WebDriver driver) {
+        return   driver.findElement(By.cssSelector("div#cart a"));
+    }
+
+    public static List<WebElement> findRemoveItemButton(WebDriver driver) {
+        return  driver.findElements(By.name("remove_cart_item"));
+    }
+
+    public static List<WebElement> findListOfHelpButtons(WebDriver driver) {
+        return  driver.findElements(By.cssSelector("label a[target]"));
+    }
+    public static List<WebElement> findListOfEditButtons(WebDriver driver) {
+        return  driver.findElements(By.cssSelector("a[title='Edit']"));
+    }
 
 }

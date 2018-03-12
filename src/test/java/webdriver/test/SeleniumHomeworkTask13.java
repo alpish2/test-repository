@@ -34,7 +34,7 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
     public void addProductsToCart(WebDriver driver) {
 
         for (int i = 0; i < 3; i++) {
-            driver.findElement(By.cssSelector("a[href='#popular-products']")).click();
+            FindElements.findPopularProductsTab(driver);
             List<WebElement> products = driver.findElements(By.xpath(".//*[@id='box-popular-products']/div/div"));
 
             products.get(i).click();
@@ -47,7 +47,7 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
                 Select oSelect = new Select(driver.findElement(By.name("options[Size]")));
                 oSelect.selectByValue("Small");
             }
-            driver.findElement(By.cssSelector("button.btn-success")).click();
+            FindElements.findAddToCartButton(driver).click();
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             String quantityAfter = Integer.toString(i + 1);
             WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -61,12 +61,13 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
     }
 
     public void removeProductsFromCart(WebDriver driver) {
-        driver.findElement(By.cssSelector("div#cart a")).click();
+        List<WebElement> deleteIcons;
+        FindElements.findCart(driver).click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        List<WebElement> deleteIcons = driver.findElements(By.name("remove_cart_item"));
+        deleteIcons = FindElements.findRemoveItemButton(driver);
         for (int i = 0; i < deleteIcons.size(); i++) {
             deleteIcons.get(i).click();
-            deleteIcons = driver.findElements(By.name("remove_cart_item"));
+            deleteIcons = FindElements.findRemoveItemButton(driver);
         }
     }
 

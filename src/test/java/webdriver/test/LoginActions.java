@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class LoginActions {
@@ -48,4 +49,46 @@ public class LoginActions {
         driver.findElement(By.name("newsletter")).click();
 
 }
+
+    public static void createProductFormFilling(WebDriver driver,  Product product){
+        //select
+        List<WebElement> selectList = driver.findElements(By.cssSelector("label.btn.btn-default"));
+        for (int i = 0; i < selectList.size(); i++) {
+            if (selectList.get(i).getText().equals("Enabled")) selectList.get(i).click();
+        }
+
+        //checkbox
+        List<WebElement> checkboxList = driver.findElements(By.cssSelector("div.checkbox label"));
+        for (int i = 0; i < checkboxList.size(); i++) {
+            if (checkboxList.get(i).isSelected()) checkboxList.get(i).clear();
+            if (checkboxList.get(i).getText().equals("Male")) checkboxList.get(i).click();
+            if (checkboxList.get(i).getText().equals("Root")) checkboxList.get(i).click();
+        }
+
+        //date
+        driver.findElement(By.cssSelector("input[name='date_valid_from']")).sendKeys(product.dateFrom);
+        driver.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys(product.dateTo);
+        //textfields
+        driver.findElement(By.cssSelector("input[name='name[en]']")).clear();
+        driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys(product.name);
+        driver.findElement(By.cssSelector("input[name='code']")).clear();
+        driver.findElement(By.cssSelector("input[name='code']")).sendKeys(product.code);
+        driver.findElement(By.cssSelector("input[name='sku']")).clear();
+        driver.findElement(By.cssSelector("input[name='sku']")).sendKeys(product.sku);
+        driver.findElement(By.cssSelector("input[name='mpn']")).clear();
+        driver.findElement(By.cssSelector("input[name='mpn']")).sendKeys(product.mpn);
+        driver.findElement(By.cssSelector("input[name='gtin']")).clear();
+        driver.findElement(By.cssSelector("input[name='gtin']")).sendKeys(product.gtin);
+        driver.findElement(By.cssSelector("input[name='taric']")).clear();
+        driver.findElement(By.cssSelector("input[name='taric']")).sendKeys(product.taric);
+        driver.findElement(By.cssSelector("input[name='keywords']")).clear();
+        driver.findElement(By.cssSelector("input[name='keywords']")).sendKeys(product.keywords);
+
+        //dropdown
+        WebElement dropdown = driver.findElement(By.cssSelector("select[name='manufacturer_id']"));
+        Select oSelect = new Select(dropdown);
+        oSelect.selectByIndex(1);
+
+
+    }
 }

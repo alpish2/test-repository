@@ -9,7 +9,6 @@ package webdriver.test;
 
 import org.junit.AfterClass;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -22,32 +21,28 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
 
     @Test
     public void checkIfNewWindowsOpen() {
+        List<WebElement> linksList;
         initFFDriver();
         GetPageActions.getCountriesPage(driver);
         openCountryPage(driver);
-        List<WebElement> linksList = driver.findElements(By.cssSelector("label a[target]"));
+        linksList = FindElements.findListOfHelpButtons(driver);
         String startWindow = driver.getWindowHandle();
         SwitchToWindowAndCloseIt(driver, linksList, startWindow);
 
     }
 
     public void openCountryPage(WebDriver driver) {
+        List<WebElement> countryList;
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        List<WebElement> countryList = driver.findElements(By.cssSelector("a[title='Edit']"));
+        countryList = FindElements.findListOfEditButtons(driver);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         countryList.get(generateRandomNum()).click();
-
     }
 
     public void SwitchToWindowAndCloseIt(WebDriver driver, List<WebElement> linksList, String startWindow) {
         for (int i = 0; i < linksList.size(); i++) {
             linksList.get(i).click();
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             ArrayList windows = new ArrayList<String>(driver.getWindowHandles());
             for (int j = 0; j < windows.size(); j++) {
                 if (!windows.get(j).toString().equals(startWindow)) {
@@ -63,7 +58,6 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
     public int generateRandomNum() {
         Random rand = new Random();
         int randomNum = rand.nextInt(242);
-
         return randomNum;
     }
 
