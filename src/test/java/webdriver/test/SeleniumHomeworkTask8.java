@@ -7,59 +7,47 @@ package webdriver.test;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask8 extends DriverInitialization {
-
-    public String selectorForCampaignProducts = "div#box-campaign-products";
-    public String selectorForPopularProducts = "div#box-popular-products";
-    public String selectorForLatestProducts = "div#box-latest-products";
 
     @Test
     public void checkCampaignProductsSticker() {
         initFFDriver();
-        BasicActions.getMainPage(driver);
-        checkSticker(setTab(driver, "Campaign Products", selectorForCampaignProducts));
+        GetPageActions.getMainPage(driver);
+        checkSticker(FindElements.findCampaignProductsTab(driver));
 
     }
 
     @Test
     public void checkPopularProductsSticker() {
         initFFDriver();
-        BasicActions.getMainPage(driver);
-        checkSticker(setTab(driver, "Popular Products", selectorForPopularProducts));
+        GetPageActions.getMainPage(driver);
+        checkSticker(FindElements.findPopularProductsTab(driver));
     }
 
     @Test
     public void checkLatestProductsSticker() {
         initFFDriver();
-        BasicActions.getMainPage(driver);
-        checkSticker(setTab(driver, "Latest Products", selectorForLatestProducts));
-    }
-
-    public WebElement setTab(WebDriver driver, String tabName, String selector) {
-        driver.findElement(By.linkText(tabName)).click();
-        WebElement firstDiv = driver.findElement(By.cssSelector(selector));
-        return firstDiv;
+        GetPageActions.getMainPage(driver);
+        checkSticker(FindElements.findLatestProductsTab(driver));
     }
 
     public void checkSticker(WebElement firstDiv) {
-        List<WebElement> secondDiv = firstDiv.findElements(By.cssSelector("div.image-wrapper"));
-        int listSize = secondDiv.size();
+        int listSize, stickerCount;
+        List<WebElement> secondDiv = FindElements.findImageWrapperList(firstDiv);
+        listSize = secondDiv.size();
         for (int i = 0; i < listSize; i++) {
-            if (secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size() != 0) {
-                int stickerCount = secondDiv.get(i).findElements(By.cssSelector("div.sticker")).size();
+            WebElement stickerElement = secondDiv.get(i);
+            List<WebElement> stickerList = FindElements.findStickerList(stickerElement);
+            if (stickerList.size() != 0) {
+                stickerCount = stickerList.size();
                 Assert.assertEquals(stickerCount, 1);
             }
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         }
     }

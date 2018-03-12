@@ -24,11 +24,12 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
 
     @Test
     public void forCountriesCheckIfOrderIsAlphabetic() throws InterruptedException {
+        List<WebElement> countries;
         initFFDriver();
-        BasicActions.getCountriesPage(driver);
+        GetPageActions.getCountriesPage(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        List<WebElement> countries = BasicActions.getCountriesList(driver);
+        countries = FindElements.findCountriesList(driver);
 
         for (int i = 0; i < countries.size() - 1; i++) {
             String firstElement = countries.get(i).getText();
@@ -40,11 +41,12 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
 
     @Test
     public void forZonesBiggerThanZeroCheckIfOrderIsAlphabetic() throws InterruptedException {
+        List<WebElement> countryList, zoneCountList;
         initFFDriver();
-        BasicActions.getCountriesPage(driver);
+        GetPageActions.getCountriesPage(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        List<WebElement> countryList = BasicActions.getCountriesList(driver);
-        List<WebElement> zoneCountList = BasicActions.getCountriesZonesList(driver);
+        countryList = FindElements.findCountriesList(driver);
+        zoneCountList = FindElements.findCountriesZonesList(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         checkIfNumberOfZonesIsNotNull(driver, countryList, zoneCountList);
 
@@ -65,7 +67,7 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
 
     public void checkOrder(String link) throws InterruptedException {
         initFFDriver();
-        BasicActions.getPageByLinkAsAdmin(driver, link);
+        GetPageActions.getPageByLinkAsAdmin(driver, link);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<WebElement> zoneList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[3]/input"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

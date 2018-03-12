@@ -11,6 +11,10 @@ public class User {
         this.password=password;
         this.confirmed_password=confirmed_password;
     }
+    User(String email, String password){
+        this.email=email;
+        this.password=password;
+    }
 
     String firstname;
     String lastname;

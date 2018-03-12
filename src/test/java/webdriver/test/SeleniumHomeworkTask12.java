@@ -25,10 +25,11 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
 
     @Test
     public void addNewProductCatalog() {
+        String productName;
         initFFDriver();
-        BasicActions.getCatalogPage(driver);
+        GetPageActions.getCatalogPage(driver);
         openNewProductPage(driver);
-        String productName = generateRandomNumForName();
+        productName = generateRandomNumForName();
         fillTheForm(driver, productName);
         saveForm(driver);
         checkNewProduct(productName, driver);
@@ -37,7 +38,7 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
     public void openNewProductPage(WebDriver driver) {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        List<WebElement> buttonList = driver.findElements(By.cssSelector("ul.list-inline.pull-right a"));
+        List<WebElement> buttonList = FindElements.findNewProductPage(driver);
         for (int i = 0; i < buttonList.size(); i++) {
             if (buttonList.get(i).getText().equals("Add New Product")) {
                 buttonList.get(i).click();

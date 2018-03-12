@@ -26,7 +26,7 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
     @Test
     public void shoppingCartAddRemove() {
         initFFDriver();
-        BasicActions.getMainPage(driver);
+        GetPageActions.getMainPage(driver);
         addProductsToCart(driver);
         removeProductsFromCart(driver);
     }

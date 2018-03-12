@@ -25,10 +25,11 @@ public class SeleniumHomeworkTask10 extends DriverInitialization {
 
     @Test
     public void checkEquivalenceOfMainPageAndProductPage () {
+        List<WebElement> elementListMainPage;
         initFFDriver();
-        BasicActions.getMainPage(driver);
-        driver.findElement(By.linkText("Campaign Products")).click();
-        List<WebElement> elementListMainPage = driver.findElements(By.cssSelector("div#box-campaign-products a"));
+        GetPageActions.getMainPage(driver);
+        WebElement mainPage = FindElements.findCampaignProductsTab(driver);
+        elementListMainPage = FindElements.findLinks(mainPage);
         String titleMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.name")).getText();
 
         WebElement elementStrongPriceMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.price-wrapper strong.campaign-price"));
@@ -43,7 +44,7 @@ public class SeleniumHomeworkTask10 extends DriverInitialization {
         String regularPriceMainPage = elementRegularPriceMainPage.getText();
 
         elementListMainPage.get(0).click();
-
+//do we go to product page here?
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         WebElement elementProductPage = driver.findElement(By.cssSelector("div.featherlight-content"));
         String titleProductPage = elementProductPage.findElement(By.cssSelector("div.row h1.title")).getText();

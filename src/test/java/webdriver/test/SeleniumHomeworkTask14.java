@@ -23,7 +23,7 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
     @Test
     public void checkIfNewWindowsOpen() {
         initFFDriver();
-        BasicActions.getCountriesPage(driver);
+        GetPageActions.getCountriesPage(driver);
         openCountryPage(driver);
         List<WebElement> linksList = driver.findElements(By.cssSelector("label a[target]"));
         String startWindow = driver.getWindowHandle();

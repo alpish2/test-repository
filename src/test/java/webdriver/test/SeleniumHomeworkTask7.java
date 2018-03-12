@@ -12,60 +12,52 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
-public class SeleniumHomeworkTask7  extends DriverInitialization{
+public class SeleniumHomeworkTask7 extends DriverInitialization {
 
     @Test
-    public void goTroughTheMenuAndCheckTitle() {
+    public void goTroughTheMenuAndCheckIfTitleExists() {
+        int menuListSize, diff = 0;
+        List<WebElement> menuList;
         initFFDriver();
-        BasicActions.getAdminPage(driver);
-        BasicActions.loginAsAdmin(driver);
+        GetPageActions.getAdminPage(driver);
+        LoginActions.loginAsAdminFromLoginPage(driver);
 
-        List<WebElement> webElementListToGetSize = driver.findElements(By.cssSelector("li#app- a"));
-        int webElementListSize = webElementListToGetSize.size();
-        System.out.println("initial SIZE:" + webElementListSize);
+        menuList = FindElements.findMenuList(driver);
+        menuListSize = menuList.size();
 
-        int diff;
-
-        for (int i = 0; i < webElementListSize; i++) {
-            List<WebElement> webElementList = driver.findElements(By.cssSelector("li#app- a"));
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            webElementList.get(i).click();
-            List<WebElement> webElementListChanged = driver.findElements(By.cssSelector("li#app- a"));
-            diff = webElementListChanged.size() - webElementListSize;
-
-
+        for (int i = 0; i < menuListSize; i++) {
+            menuList = FindElements.findMenuList(driver);
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            menuList.get(i).click();
+            menuList = FindElements.findMenuList(driver);
+            diff = menuList.size() - menuListSize;
             if (diff != 0) {
 
-                for (int j = 1; j <= diff; j++) {
-                    List<WebElement> webElementListChanged2 = driver.findElements(By.cssSelector("li#app- a"));
-                    webElementListChanged2.get(i + j).click();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Assert.assertTrue("h1 element exists on the current page: ", driver.findElement(By.cssSelector("h1")).isDisplayed());
-
-                }
-                BasicActions.getAdminPage(driver);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+                checkIfTitleExistsOnThePage(driver, diff, menuList, i);
+                GetPageActions.getAdminPage(driver);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             }
         }
 
+    }
+
+
+    public void checkIfTitleExistsOnThePage(WebDriver driver, int diff, List<WebElement> menuList, int i) {
+
+        for (int j = 1; j <= diff; j++) {
+            menuList = FindElements.findMenuList(driver);
+            menuList.get(i + j).click();
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            Assert.assertTrue("h1 element exists on the current page: ", driver.findElement(By.cssSelector("h1")).isDisplayed());
+
+        }
     }
 
     @AfterClass

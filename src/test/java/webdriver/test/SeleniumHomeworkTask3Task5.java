@@ -15,15 +15,15 @@ public class SeleniumHomeworkTask3Task5 extends DriverInitialization {
     @Test
     public void loginToAdminPageWithIE() {
         initIEDriver();
-        BasicActions.getAdminPage(driver);
-        BasicActions.loginAsAdmin(driver);
+        GetPageActions.getAdminPage(driver);
+        LoginActions.loginAsAdminFromLoginPage(driver);
     }
 
     @Test
     public void loginToAdminPageWithFFesr() {
         initFFDriver();
-        BasicActions.getAdminPage(driver);
-        BasicActions.loginAsAdmin(driver);
+        GetPageActions.getAdminPage(driver);
+        LoginActions.loginAsAdminFromLoginPage(driver);
     }
 
     @AfterClass
