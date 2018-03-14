@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f08f6d17-ee32-44b9-b0b7-3cc344c42b5a" name="Default" comment="- task 3 and task 5 completed (get login page with IE11 and FF ESR)&#10;- class for task 7 created">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/opishcheiko.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/Data.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/DriverInitialization.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/DriverInitialization.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/FindElements.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/FindElements.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/GeckoDriverExample.java" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/GetPageActions.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/GetPageActions.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/LoginActions.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/LoginActions.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask10.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask10.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask11.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask11.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask12.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask12.java" />
       <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask13.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask13.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask14.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask14.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask17.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask17.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask7.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask8.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask8.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask9.java" afterPath="$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask9.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -79,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SeleniumHomeworkTask14.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SeleniumHomeworkTask14.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask14.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+            <state relative-caret-position="-11">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="method#checkIfNewWindowsOpen#0;class#SeleniumHomeworkTask14#0" expanded="false" />
                 <element signature="method#openCountryPage#0;class#SeleniumHomeworkTask14#0" expanded="false" />
@@ -93,11 +77,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SeleniumHomeworkTask13.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask13.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="90" column="8" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
+              <folding>
+                <element signature="method#shoppingCartAddRemove#0;class#SeleniumHomeworkTask13#0" expanded="false" />
+                <element signature="method#addProductsToCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
+                <element signature="method#selectSizeIfThisFieldExists#0;class#SeleniumHomeworkTask13#0" expanded="false" />
+                <element signature="method#removeProductsFromCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
+                <element signature="method#waitForProductTooBeAddedToTheCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
+                <marker date="1521041467569" expanded="true" signature="26:605" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FindElements.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/FindElements.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="122" column="74" lean-forward="false" selection-start-line="122" selection-start-column="74" selection-end-line="122" selection-end-column="74" />
+            <state relative-caret-position="-188">
+              <caret line="130" column="75" lean-forward="false" selection-start-line="130" selection-start-column="75" selection-end-line="130" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#findMenuList#0;class#FindElements#0" expanded="false" />
@@ -1161,10 +1162,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask17.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <element signature="method#checkIfLogsMessageExists#0;class#SeleniumHomeworkTask17#0" expanded="false" />
+            <element signature="method#openAndCloseEachProductPage#0;class#SeleniumHomeworkTask17#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/GetPageActions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding>
+            <element signature="method#getMainPage#0;class#GetPageActions#0" expanded="false" />
+            <element signature="method#getCountriesPage#0;class#GetPageActions#0" expanded="false" />
+            <element signature="method#getPageByLinkAsAdmin#0;class#GetPageActions#0" expanded="false" />
+            <element signature="method#getPageByLink#0;class#GetPageActions#0" expanded="false" />
+            <element signature="method#getCatalogPage#0;class#GetPageActions#0" expanded="false" />
+            <element signature="method#getSecurityPage#0;class#GetPageActions#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/FindElements.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="122" column="74" lean-forward="false" selection-start-line="122" selection-start-column="74" selection-end-line="122" selection-end-column="74" />
+        <state relative-caret-position="-188">
+          <caret line="130" column="75" lean-forward="false" selection-start-line="130" selection-start-column="75" selection-end-line="130" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#findMenuList#0;class#FindElements#0" expanded="false" />
@@ -1206,55 +1233,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask14.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="method#checkIfNewWindowsOpen#0;class#SeleniumHomeworkTask14#0" expanded="false" />
+            <element signature="method#openCountryPage#0;class#SeleniumHomeworkTask14#0" expanded="false" />
+            <element signature="method#SwitchToWindowAndCloseIt#0;class#SeleniumHomeworkTask14#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask13.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="63" column="57" lean-forward="false" selection-start-line="63" selection-start-column="57" selection-end-line="63" selection-end-column="57" />
+        <state relative-caret-position="275">
+          <caret line="90" column="8" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
           <folding>
             <element signature="method#shoppingCartAddRemove#0;class#SeleniumHomeworkTask13#0" expanded="false" />
             <element signature="method#addProductsToCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
             <element signature="method#selectSizeIfThisFieldExists#0;class#SeleniumHomeworkTask13#0" expanded="false" />
             <element signature="method#removeProductsFromCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
             <element signature="method#waitForProductTooBeAddedToTheCart#0;class#SeleniumHomeworkTask13#0" expanded="false" />
-            <marker date="1521040773129" expanded="true" signature="26:605" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask17.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="method#checkIfLogsMessageExists#0;class#SeleniumHomeworkTask17#0" expanded="false" />
-            <element signature="method#openAndCloseEachProductPage#0;class#SeleniumHomeworkTask17#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/GetPageActions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding>
-            <element signature="method#getMainPage#0;class#GetPageActions#0" expanded="false" />
-            <element signature="method#getCountriesPage#0;class#GetPageActions#0" expanded="false" />
-            <element signature="method#getPageByLinkAsAdmin#0;class#GetPageActions#0" expanded="false" />
-            <element signature="method#getPageByLink#0;class#GetPageActions#0" expanded="false" />
-            <element signature="method#getCatalogPage#0;class#GetPageActions#0" expanded="false" />
-            <element signature="method#getSecurityPage#0;class#GetPageActions#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/webdriver/test/SeleniumHomeworkTask14.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="method#checkIfNewWindowsOpen#0;class#SeleniumHomeworkTask14#0" expanded="false" />
-            <element signature="method#openCountryPage#0;class#SeleniumHomeworkTask14#0" expanded="false" />
-            <element signature="method#SwitchToWindowAndCloseIt#0;class#SeleniumHomeworkTask14#0" expanded="false" />
+            <marker date="1521041467569" expanded="true" signature="26:605" ph="..." />
           </folding>
         </state>
       </provider>

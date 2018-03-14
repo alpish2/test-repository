@@ -88,7 +88,7 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
 
     @AfterClass
     public static void quitDriver() {
-        // driver.quit();
+        driver.quit();
     }
 
 }
