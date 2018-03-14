@@ -11,32 +11,25 @@ package webdriver.test;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask9 extends DriverInitialization {
 
-    String countryWithZones;
-
     @Test
-    public void forCountriesCheckIfOrderIsAlphabetic() throws InterruptedException {
+    public void forCountriesCheckIfOrderIsAlphabetic() {
         List<WebElement> countries;
         initFFDriver();
         GetPageActions.getCountriesPage(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         countries = FindElements.findCountriesList(driver);
+        compareTitleBubbleSort(countries);
 
-        for (int i = 0; i < countries.size() - 1; i++) {
-            String firstElement = countries.get(i).getText();
-            String secondElement = countries.get(i + 1).getText();
-            Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
 
-        }
     }
 
     @Test
@@ -44,39 +37,49 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
         List<WebElement> countryList, zoneCountList;
         initFFDriver();
         GetPageActions.getCountriesPage(driver);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         countryList = FindElements.findCountriesList(driver);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         zoneCountList = FindElements.findCountriesZonesList(driver);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        checkIfNumberOfZonesIsNotNull(driver, countryList, zoneCountList);
-
-    }
-
-    public void checkIfNumberOfZonesIsNotNull(WebDriver driver, List<WebElement> countryList, List<WebElement> zoneCountList) throws InterruptedException {
-        for (int i = 0; i < zoneCountList.size(); i++) {
+        List<String> linkToCountryWithZones = checkIfNumberOfZonesIsNotNull(driver, countryList, zoneCountList);
+        System.out.println("INFO: number of links:" + linkToCountryWithZones.size());
+        for (int i = 0; i < linkToCountryWithZones.size(); i++) {
+            initFFDriver();
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            if (zoneCountList.get(i).getText().compareTo("0") != 0) {
-                countryWithZones = countryList.get(i).getAttribute("href");
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                checkOrder(countryWithZones);
-            }
+            GetPageActions.getPageByLinkAsAdmin(driver, linkToCountryWithZones.get(i));
+            List<WebElement> zoneList = FindElements.findZonesInCountriesSectionList(driver);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            compareTitleBubbleSort(zoneList);
+        }
+    }
 
+    public void compareTitleBubbleSort(List<WebElement> titles) {
+
+        for (int i = 0; i < titles.size() - 1; i++) {
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            String firstElement = titles.get(i).getText();
+            String secondElement = titles.get(i + 1).getText();
+            Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
+            System.out.println("first element " + firstElement + "is located before second element" + secondElement);
 
         }
     }
 
-    public void checkOrder(String link) throws InterruptedException {
-        initFFDriver();
-        GetPageActions.getPageByLinkAsAdmin(driver, link);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        List<WebElement> zoneList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[3]/input"));
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        for (int i = 0; i < zoneList.size() - 1; i++) {
-            String firstElement = zoneList.get(i).getAttribute("value");
-            String secondElement = zoneList.get(i + 1).getAttribute("value");
-            Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
+    public List<String> checkIfNumberOfZonesIsNotNull(WebDriver driver, List<WebElement> countryList, List<WebElement> zoneCountList) throws InterruptedException {
+        List<String> linksToZones = new ArrayList<String>();
+        for (int i = 0; i < zoneCountList.size(); i++) {
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            if (zoneCountList.get(i).getText().compareTo("0") != 0) {
+                linksToZones.add(countryList.get(i).getAttribute("href"));
+                for (int j = 0; j < linksToZones.size(); j++) {
+                    System.out.println("INFO: Countries with zones!=0:  " + linksToZones.get(j));
+                }
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+            }
         }
-        driver.close();
+        return linksToZones;
     }
 
     @AfterClass

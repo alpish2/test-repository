@@ -16,13 +16,14 @@ import java.util.logging.Level;
 
 public class DriverInitialization {
 
-  public static WebDriver driver;
+    public static WebDriver driver;
 
     public void initIEDriver() {
         InternetExplorerOptions IEOptions = new InternetExplorerOptions();
         IEOptions.setCapability("IEDriverServer", true);
         driver = new InternetExplorerDriver(IEOptions);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        System.out.println("SUCCESS: " + "IE driver is initialized");
     }
 
     public void initFFDriver() {
@@ -30,6 +31,7 @@ public class DriverInitialization {
         firefoxOptions.setCapability("marionette", true);
         driver = new FirefoxDriver(firefoxOptions);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        System.out.println("SUCCESS: " + "FF driver is initialized");
     }
 
     public void initChromeDriver() {
@@ -40,5 +42,6 @@ public class DriverInitialization {
         chromeOptions.setCapability(CapabilityType.LOGGING_PREFS, prefs);
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        System.out.println("SUCCESS: " + "Chrome driver is initialized");
     }
 }

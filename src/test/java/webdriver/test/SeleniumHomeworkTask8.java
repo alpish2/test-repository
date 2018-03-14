@@ -19,7 +19,7 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
         initFFDriver();
         GetPageActions.getMainPage(driver);
         checkSticker(FindElements.findCampaignProductsTab(driver));
-
+        System.out.println("SUCCESS: stickers for Campaign Products tab checked");
     }
 
     @Test
@@ -27,6 +27,7 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
         initFFDriver();
         GetPageActions.getMainPage(driver);
         checkSticker(FindElements.findPopularProductsTab(driver));
+        System.out.println("SUCCESS: stickers for Popular Products tab checked");
     }
 
     @Test
@@ -34,6 +35,7 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
         initFFDriver();
         GetPageActions.getMainPage(driver);
         checkSticker(FindElements.findLatestProductsTab(driver));
+        System.out.println("SUCCESS: stickers for Latest Products tab checked");
     }
 
     public void checkSticker(WebElement firstDiv) {
@@ -41,17 +43,18 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
         List<WebElement> secondDiv = FindElements.findImageWrapperList(firstDiv);
         listSize = secondDiv.size();
         for (int i = 0; i < listSize; i++) {
+            List<WebElement> stickerList;
             WebElement stickerElement = secondDiv.get(i);
-            List<WebElement> stickerList = FindElements.findStickerList(stickerElement);
+            stickerList = FindElements.findStickerList(stickerElement);
             if (stickerList.size() != 0) {
+                System.out.println("SUCCESS: sticker for this image exists");
                 stickerCount = stickerList.size();
                 Assert.assertEquals(stickerCount, 1);
+                System.out.println("SUCCESS: sticker for this image is the only one");
             }
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
         }
     }
-
 
     @AfterClass
     public static void quitDriver() {

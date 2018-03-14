@@ -18,11 +18,11 @@ import org.openqa.selenium.logging.LogType;
 
 import java.util.List;
 
-public class SeleniumHomeworkTask17 extends DriverInitialization{
+public class SeleniumHomeworkTask17 extends DriverInitialization {
 
     @Test
     public void checkIfLogsMessageExists() {
-        String link="http://localhost:8080/litecart/admin/?app=catalog&doc=catalog&category_id=1";
+        String link = "http://localhost:8080/litecart/admin/?app=catalog&doc=catalog&category_id=1";
         initChromeDriver();
         GetPageActions.getPageByLinkAsAdmin(driver, link);
         openAndCloseEachProductPage(driver);

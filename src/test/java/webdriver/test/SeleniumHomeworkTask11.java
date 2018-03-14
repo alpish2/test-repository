@@ -18,12 +18,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask11 extends DriverInitialization {
 
-    String link = "http://localhost:8088/litecart/admin/?app=settings&doc=security";
 
     @Test
     public void registerNewUser() {
         initFFDriver();
-        User user1 = new User("sasha", "pish", "sashapish6@sdl.com", "sasha", "sasha");
+        User user1 = new User(Data.firstname, Data.lastname, Data.emailPart1 + LoginActions.generateRandomNum() + Data.emailPart3, Data.password, Data.confirmed_password);
 
         turnOffCapchaSetting();
         GetPageActions.getMainPage(driver);
@@ -31,12 +30,12 @@ public class SeleniumHomeworkTask11 extends DriverInitialization {
         LoginActions.createAccountFormFilling(driver, user1);
         submitRegistrationForm(driver);
         logoutFromMainPage(driver);
-        loginFromMainPage(driver);
+        loginFromMainPage(driver, user1);
         logoutFromMainPage(driver);
     }
 
     public void turnOffCapchaSetting() {
-        GetPageActions.getPageByLinkAsAdmin(driver, link);
+        GetPageActions.getSecurityPage(driver);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         List<WebElement> elementList = driver.findElements(By.xpath(".//*[@id='main']/form/table/tbody//td[1]"));
         for (int i = 0; i < elementList.size(); i++) {
@@ -51,35 +50,32 @@ public class SeleniumHomeworkTask11 extends DriverInitialization {
                         trueFalse.get(j + 1).click();
                         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
                         FindElements.findSaveButton(driver).click();
-                        System.out.println("saved");
+                        System.out.println("INFO:" + "Captcha settings saved. It is turned off now");
                         break;
                     } else {
                         FindElements.findCancelButton(driver).click();
-                        System.out.println("canceled");
+                        System.out.println("INFO: " + "Captcha setting change canceled. It was already turned off");
                     }
                 }
-                System.out.println("capcha is turned off");
+                System.out.println("SUCCESS: " + "Capcha is turned off");
             }
-
         }
-
-        driver.quit();
     }
 
     public void openCreateAccountPage(WebDriver driver) {
         FindElements.findDropdownToggleButton(driver).click();
         FindElements.findCreateAccountButtonInMenu(driver).click();
+        System.out.println("INFO: Create account page should be opened: " + driver.getCurrentUrl());
     }
 
     public void submitRegistrationForm(WebDriver driver) {
         FindElements.findCreateAccountButtonInForm(driver).click();
+        System.out.println("INFO: New user should be created now");
     }
 
-    public void loginFromMainPage(WebDriver driver) {
-        User user2 = new User("sashapish6@sdl.com", "sasha");
+    public void loginFromMainPage(WebDriver driver, User user1) {
         FindElements.findDropdownToggleButton(driver).click();
-        LoginActions.loginAsUserFromMenu(driver, user2);
-        FindElements.findLoginButtonInMenu(driver).click();
+        LoginActions.loginAsUserFromMenu(driver, user1);
     }
 
     public void logoutFromMainPage(WebDriver driver) {

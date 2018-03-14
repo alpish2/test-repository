@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask14 extends DriverInitialization {
@@ -36,7 +35,7 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         countryList = FindElements.findListOfEditButtons(driver);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        countryList.get(generateRandomNum()).click();
+        countryList.get(LoginActions.generateRandomNum()).click();
     }
 
     public void SwitchToWindowAndCloseIt(WebDriver driver, List<WebElement> linksList, String startWindow) {
@@ -55,11 +54,6 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
         }
     }
 
-    public int generateRandomNum() {
-        Random rand = new Random();
-        int randomNum = rand.nextInt(242);
-        return randomNum;
-    }
 
     @AfterClass
     public static void quitDriver() {

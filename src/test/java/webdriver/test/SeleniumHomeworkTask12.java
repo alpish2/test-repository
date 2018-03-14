@@ -16,22 +16,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask12 extends DriverInitialization {
 
     @Test
     public void addNewProductCatalog() {
-        Product product= new Product( "1991-01-01", "1995-01-01", generateRandomNumForName(), "123", "123" ,  "123",  "123", "123", "qwerty");
-        String productName;
+        String productName = "name" + LoginActions.generateRandomNum();
+        Product product = new Product(Data.dateFrom, Data.dateTo, productName, Data.code, Data.sku, Data.mpn, Data.gtin, Data.taric, Data.keywords);
         initFFDriver();
         GetPageActions.getCatalogPage(driver);
         openNewProductPage(driver);
-        productName = generateRandomNumForName();
-        LoginActions.createProductFormFilling(driver,product);
+        LoginActions.createProductFormFilling(driver, product);
         saveForm(driver);
-        checkNewProduct(productName, driver);
+        checkThatNewProductAppearedInCatalog(productName, driver);
     }
 
     public void openNewProductPage(WebDriver driver) {
@@ -44,11 +42,16 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
                 break;
             }
         }
+        System.out.println("INFO: New Product Page should be opened now");
 
     }
 
-    public void checkNewProduct(String productName, WebDriver driver) {
-        //login to catalog
+    public void saveForm(WebDriver driver) {
+        FindElements.findSaveButton(driver).click();
+        System.out.println("New product should be created now");
+    }
+
+    public void checkThatNewProductAppearedInCatalog(String productName, WebDriver driver) {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         int temp = 0;
         List<WebElement> productList = driver.findElements(By.cssSelector("table tr td a"));
@@ -59,17 +62,7 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
             }
         }
         Assert.assertEquals(temp, 1);
-    }
-
-    public String generateRandomNumForName() {
-        Random rand = new Random();
-        int randomNumber = rand.nextInt(50);
-        String productName = "Oleksandra" + randomNumber;
-        return productName;
-    }
-
-    public void saveForm(WebDriver driver) {
-       FindElements.findSaveButton(driver).click();
+        System.out.println("INFO: New product appears on the Catalog page");
     }
 
     @AfterClass
