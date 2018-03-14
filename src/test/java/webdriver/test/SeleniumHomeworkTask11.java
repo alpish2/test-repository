@@ -34,6 +34,12 @@ public class SeleniumHomeworkTask11 extends DriverInitialization {
         logoutFromMainPage(driver);
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void turnOffCapchaSetting() {
         GetPageActions.getSecurityPage(driver);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -81,10 +87,5 @@ public class SeleniumHomeworkTask11 extends DriverInitialization {
     public void logoutFromMainPage(WebDriver driver) {
         FindElements.findDropdownToggleButton(driver).click();
         FindElements.findLogoutButtonInMenu(driver).click();
-    }
-
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
     }
 }

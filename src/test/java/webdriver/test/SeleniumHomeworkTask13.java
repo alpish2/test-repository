@@ -31,6 +31,13 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
         removeProductsFromCart(driver);
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
+
     public void addProductsToCart(WebDriver driver) {
 
         System.out.println("INFO: Three products to be added to cart ...");
@@ -86,10 +93,6 @@ public class SeleniumHomeworkTask13 extends DriverInitialization {
         Assert.assertTrue(quantityBeforeInt < quantityAfterInt);
     }
 
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
-    }
 
 }
 

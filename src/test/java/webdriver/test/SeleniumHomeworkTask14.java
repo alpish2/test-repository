@@ -30,6 +30,12 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
 
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void openCountryPage(WebDriver driver) {
         List<WebElement> countryList;
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -52,12 +58,6 @@ public class SeleniumHomeworkTask14 extends DriverInitialization {
             }
 
         }
-    }
-
-
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
     }
 
 

@@ -54,6 +54,12 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
         }
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void compareTitleBubbleSort(List<WebElement> titles) {
 
         for (int i = 0; i < titles.size() - 1; i++) {
@@ -82,9 +88,5 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
         return linksToZones;
     }
 
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
-    }
 
 }

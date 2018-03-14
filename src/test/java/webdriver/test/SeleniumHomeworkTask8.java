@@ -38,6 +38,12 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
         System.out.println("SUCCESS: stickers for Latest Products tab checked");
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void checkSticker(WebElement firstDiv) {
         int listSize, stickerCount;
         List<WebElement> secondDiv = FindElements.findImageWrapperList(firstDiv);
@@ -54,10 +60,5 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
             }
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         }
-    }
-
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
     }
 }

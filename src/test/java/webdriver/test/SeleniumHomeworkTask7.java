@@ -33,6 +33,12 @@ public class SeleniumHomeworkTask7 extends DriverInitialization {
         handlingSubMenus(driver, menuListSize);
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void handlingSubMenus(WebDriver driver, int menuListSize) {
         for (int i = 0; i < menuListSize; i++) {
             List<WebElement> menuList = FindElements.findMenuList(driver);
@@ -61,11 +67,6 @@ public class SeleniumHomeworkTask7 extends DriverInitialization {
             System.out.println("SUCCESS: Title exists on the current page: " + title.getText());
 
         }
-    }
-
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
     }
 
 

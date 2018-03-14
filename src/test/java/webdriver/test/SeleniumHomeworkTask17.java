@@ -33,6 +33,12 @@ public class SeleniumHomeworkTask17 extends DriverInitialization {
         }
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void openAndCloseEachProductPage(WebDriver driver) {
         List<WebElement> productList = driver.findElements(By.xpath("//*[@id=\"main\"]/form/table/tbody//td[3]/a"));
         for (int i = 0; i < productList.size(); i++) {
@@ -49,9 +55,5 @@ public class SeleniumHomeworkTask17 extends DriverInitialization {
         }
     }
 
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
-    }
 
 }

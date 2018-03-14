@@ -32,6 +32,12 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
         checkThatNewProductAppearedInCatalog(productName, driver);
     }
 
+    @AfterClass
+    public static void quitDriver() {
+        driver.quit();
+    }
+
+
     public void openNewProductPage(WebDriver driver) {
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -63,11 +69,6 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
         }
         Assert.assertEquals(temp, 1);
         System.out.println("INFO: New product appears on the Catalog page");
-    }
-
-    @AfterClass
-    public static void quitDriver() {
-        driver.quit();
     }
 
 }
