@@ -52,7 +52,7 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
             if (stickerList.size() != 0) {
                 System.out.println("SUCCESS: sticker for this image exists");
                 stickerCount = stickerList.size();
-                Assert.assertEquals(stickerCount, 1);
+                Assert.assertEquals("Stickers number for this product is not 1", 1, stickerCount);
                 System.out.println("SUCCESS: sticker for this image is the only one");
             }
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);

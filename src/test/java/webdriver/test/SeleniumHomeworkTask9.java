@@ -57,7 +57,9 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             String firstElement = titles.get(i).getText();
             String secondElement = titles.get(i + 1).getText();
-            Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
+            Assert.assertTrue("element " + secondElement +
+                            " is not bigger than " + firstElement,
+                    secondElement.compareTo(firstElement) > 0);
             System.out.println("first element "
                     + firstElement
                     + "is located before second element" + secondElement);

@@ -65,13 +65,13 @@ public class SeleniumHomeworkTask10 extends DriverInitialization {
 
         Assert.assertTrue(titleMainPage.equals(titleProductPage));
 
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("color"), "rgb(204, 0, 0)");
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("font-weight"), "700");
+        Assert.assertEquals("Color is not red", "rgb(204, 0, 0)", elementStrongPriceMainPage.getCssValue("color"));
+        Assert.assertEquals("Text is not bold", "700", elementStrongPriceMainPage.getCssValue("font-weight"));
         Assert.assertTrue(strongPriceMainPage.equals(strongPriceProductPage));
         System.out.println("Color of price1 is red and bold");
 
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("color"), "rgb(51, 51, 51)");
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("text-decoration"), "line-through");
+        Assert.assertEquals("Color is not gray", "rgb(51, 51, 51)", elementRegularPriceMainPage.getCssValue("color"));
+        Assert.assertEquals("Text is not crossed off", "line-through", elementRegularPriceMainPage.getCssValue("text-decoration"));
         Assert.assertTrue(regularPriceMainPage.equals(regularPriceProductPage));
         System.out.println("Color of price2 is gray and crossed off");
 

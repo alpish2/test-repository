@@ -57,7 +57,7 @@ public class SeleniumHomeworkTask7 extends DriverInitialization {
             menuList.get(i + j).click();
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             WebElement title = FindElements.findTitle(driver);
-            Assert.assertTrue(title.isDisplayed());
+            Assert.assertTrue("Title is not displayed on the page:" + driver.getCurrentUrl(), title.isDisplayed());
             System.out.println("SUCCESS: Title exists on the current page: " + title.getText());
 
         }

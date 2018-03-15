@@ -70,7 +70,7 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
                 break;
             }
         }
-        Assert.assertEquals(temp, 1);
+        Assert.assertEquals("New product is not appearing in catalog", 1, temp);
         System.out.println("INFO: New product appears on the Catalog page");
     }
 
