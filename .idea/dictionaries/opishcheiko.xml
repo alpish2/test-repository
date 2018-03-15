@@ -2,6 +2,12 @@
   <dictionary name="opishcheiko">
     <words>
       <w>capcha</w>
+      <w>firstname</w>
+      <w>gtin</w>
+      <w>lastname</w>
+      <w>pish</w>
+      <w>sashapish</w>
+      <w>taric</w>
     </words>
   </dictionary>
 </component>

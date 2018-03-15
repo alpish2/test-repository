@@ -14,6 +14,7 @@ public class GetPageActions {
 
     public static void getMainPage(WebDriver driver) {
         driver.get(Data.mainPageLink);
+
         if (driver.getCurrentUrl().equals(Data.mainPageLink))
             System.out.println("SUCCESS: " + "Main page should be opened now. Current URL: " + driver.getCurrentUrl());
         else

@@ -1,8 +1,6 @@
 package webdriver.test;
 
     /*
-    Task 7
-    Сделайте сценарий, который выполняет следующие действия в учебном приложении litecart.
             1) входит в панель администратора http://localhost/litecart/admin
             2) прокликивает последовательно все пункты меню слева, включая вложенные пункты
             3) для каждой страницы проверяет наличие заголовка (то есть элемента с тегом h1)
@@ -16,7 +14,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 
 public class SeleniumHomeworkTask7 extends DriverInitialization {
 
@@ -37,7 +34,6 @@ public class SeleniumHomeworkTask7 extends DriverInitialization {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public void handlingSubMenus(WebDriver driver, int menuListSize) {
         for (int i = 0; i < menuListSize; i++) {

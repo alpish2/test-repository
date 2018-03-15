@@ -1,9 +1,7 @@
 package webdriver.test;
-// Задание 18. Перенаправьте трафик в прокси-сервер
-//        Установите какой-нибудь прокси-сервер, который умеет протоколировать запросы и ответы.
-//        Инициализируйте драйвер так, чтобы запросы из браузера отправлялись через этот прокси-сервер,
-//        убедитесь, что они там видны.
 
+// Перенаправьте трафик в прокси-сервер
+//        Инициализируйте драйвер так, чтобы запросы из браузера отправлялись через этот прокси-сервер.
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -33,7 +31,6 @@ public class SeleniumHomeworkTask18 {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public static void initDriverWithProxy(String link) {
         ChromeOptions chromeOptions = new ChromeOptions();

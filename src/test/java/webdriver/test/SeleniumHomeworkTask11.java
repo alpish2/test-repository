@@ -1,11 +1,8 @@
 package webdriver.test;
 
-//Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart (не в админке, а в клиентской части магазина).
+//  Сделайте сценарий для регистрации нового пользователя в учебном приложении litecart
 //        1) регистрация новой учётной записи,
-//        2) выход (logout), потому что после успешной регистрации автоматически происходит вход,
-//        3) повторный вход в только что созданную учётную запись,
-//        4) и ещё раз выход.
-//        В форме регистрации есть капча, её нужно отключить в админке учебного приложения на вкладке Settings -> Security.
+//        2) выход (logout), повторный вход в только что созданную учётную запись, и ещё раз выход.
 
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -17,7 +14,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumHomeworkTask11 extends DriverInitialization {
-
 
     @Test
     public void registerNewUser() {
@@ -38,7 +34,6 @@ public class SeleniumHomeworkTask11 extends DriverInitialization {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public void turnOffCapchaSetting() {
         GetPageActions.getSecurityPage(driver);

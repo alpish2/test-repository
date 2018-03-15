@@ -1,10 +1,6 @@
 package webdriver.test;
 /*
-Сделайте сценарий для добавления нового товара (продукта) в учебном приложении litecart (в админке).
-        Для добавления товара нужно открыть меню Catalog,
-        в правом верхнем углу нажать кнопку "Add New Product",
-        заполнить поля с информацией о товаре и сохранить.
-        заполнить только информацию на вкладках General, Information и Prices.
+Сделайте сценарий для добавления нового товара ( меню Catalog) в учебном приложении litecart (в админке).
         После сохранения товара нужно убедиться, что он появился в каталоге
 */
 
@@ -36,7 +32,6 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public void openNewProductPage(WebDriver driver) {
 

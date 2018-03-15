@@ -1,9 +1,9 @@
 package webdriver.test;
-//Задание 17. Проверьте отсутствие сообщений в логе браузера
+
+// Проверьте отсутствие сообщений в логе браузера
 //        Сценарий должен состоять из следующих частей:
 //        1) зайти в админку
-//        2) открыть каталог, категорию, которая содержит товары
-//        3) последовательно открывать страницы товаров и проверять, не появляются ли в логе браузера сообщения
+//        2) последовательно открывать страницы товаров и проверять, не появляются ли в логе браузера сообщения
 
 
 import org.junit.AfterClass;
@@ -37,7 +37,6 @@ public class SeleniumHomeworkTask17 extends DriverInitialization {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public void openAndCloseEachProductPage(WebDriver driver) {
         List<WebElement> productList = driver.findElements(By.xpath("//*[@id=\"main\"]/form/table/tbody//td[3]/a"));

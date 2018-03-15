@@ -1,8 +1,6 @@
 package webdriver.test;
 
-/*    Сделайте сценарий, проверяющий наличие стикеров у всех товаров
-в учебном приложении litecart на главной странице.
-Сценарий должен проверять, что у каждого товара имеется ровно один стикер.*/
+/*    Сделайте сценарий, проверяющий наличие ровно одного стикера у всех товаров. */
 
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -42,7 +40,6 @@ public class SeleniumHomeworkTask8 extends DriverInitialization {
     public static void quitDriver() {
         driver.quit();
     }
-
 
     public void checkSticker(WebElement firstDiv) {
         int listSize, stickerCount;

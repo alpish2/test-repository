@@ -13,16 +13,18 @@ public class LoginActions {
 
     public static void loginAsAdminFromLoginPage(WebDriver driver) {
         driver.findElement(By.name("username")).clear();
-        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("username")).sendKeys(Data.usernameAdmin);
         driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys(Data.passwordAdmin);
         driver.findElement(By.name("remember_me")).click();
         driver.findElement(By.cssSelector("button[name='login']")).click();
     }
 
     public static void loginAsUserFromMenu(WebDriver driver, User user) {
-        driver.findElement(By.cssSelector("ul.dropdown-menu [name='email']")).sendKeys(user.email);
-        driver.findElement(By.cssSelector("ul.dropdown-menu [name='password']")).sendKeys(user.password);
+        FindElements.findUsernameFieldInMenu(driver).clear();
+        FindElements.findUsernameFieldInMenu(driver).sendKeys(user.email);
+        FindElements.findPasswordFieldInMenu(driver).clear();
+        FindElements.findPasswordFieldInMenu(driver).sendKeys(user.password);
         FindElements.findLoginButtonInMenu(driver).click();
         if (FindElements.findSuccessAlert(driver).size() != 0)
             System.out.println("SUCCESS: " + "success message should be displayed, login should be successful. ");
@@ -34,28 +36,32 @@ public class LoginActions {
     }
 
     public static void createAccountFormFilling(WebDriver driver, User user) {
-        driver.findElement(By.name("firstname")).sendKeys(user.firstname);
-        driver.findElement(By.name("lastname")).sendKeys(user.lastname);
+        FindElements.findElementByName(driver, "firstname").clear();
+        FindElements.findElementByName(driver, "firstname").sendKeys(user.firstname);
+        FindElements.findElementByName(driver, "lastname").clear();
+        FindElements.findElementByName(driver, "lastname").sendKeys(user.lastname);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        FindElements.findEmailFieldInCreateAccountForm(driver).clear();
+        FindElements.findEmailFieldInCreateAccountForm(driver).sendKeys(user.email);
+        FindElements.findPasswordFieldInCreateAccountForm(driver).clear();
+        FindElements.findPasswordFieldInCreateAccountForm(driver).sendKeys(user.password);
+        FindElements.findConfirmPasswordFieldInCreateAccountForm(driver).clear();
+        FindElements.findConfirmPasswordFieldInCreateAccountForm(driver).sendKeys(user.confirmed_password);
 
-        driver.findElement(By.cssSelector("div#box-create-account [name='email']")).sendKeys(user.email);
-        driver.findElement(By.cssSelector("div#box-create-account [name='password']")).sendKeys(user.password);
-        driver.findElement(By.cssSelector("div#box-create-account [name='confirmed_password']")).sendKeys(user.confirmed_password);
-
-        WebElement countryCode = driver.findElement(By.name("country_code"));
+        WebElement countryCode = FindElements.findElementByName(driver, "country_code");
         Select oselect1 = new Select(countryCode);
         oselect1.selectByValue("US");
 
 
         if (driver.findElement(By.cssSelector("select[name='country_code'] option[value='US']")).isSelected()) {
-            WebElement zoneCode = driver.findElement(By.name("zone_code"));
+            WebElement zoneCode = FindElements.findElementByName(driver, "zone_code");
             Select oselect2 = new Select(zoneCode);
             oselect2.selectByIndex(3);
         }
 
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        if (!driver.findElement(By.name("newsletter")).isSelected())
-            driver.findElement(By.name("newsletter")).click();
+        if (!FindElements.findElementByName(driver, "newsletter").isSelected())
+            FindElements.findElementByName(driver, "newsletter").click();
 
     }
 
@@ -75,30 +81,29 @@ public class LoginActions {
         }
 
         //date
-        driver.findElement(By.cssSelector("input[name='date_valid_from']")).sendKeys(product.dateFrom);
-        driver.findElement(By.cssSelector("input[name='date_valid_to']")).sendKeys(product.dateTo);
+        FindElements.findElementByInputName(driver, "date_valid_from").sendKeys(product.dateFrom);
+        FindElements.findElementByInputName(driver, "date_valid_to").sendKeys(product.dateTo);
+
         //textfields
-        driver.findElement(By.cssSelector("input[name='name[en]']")).clear();
-        driver.findElement(By.cssSelector("input[name='name[en]']")).sendKeys(product.name);
-        driver.findElement(By.cssSelector("input[name='code']")).clear();
-        driver.findElement(By.cssSelector("input[name='code']")).sendKeys(product.code);
-        driver.findElement(By.cssSelector("input[name='sku']")).clear();
-        driver.findElement(By.cssSelector("input[name='sku']")).sendKeys(product.sku);
-        driver.findElement(By.cssSelector("input[name='mpn']")).clear();
-        driver.findElement(By.cssSelector("input[name='mpn']")).sendKeys(product.mpn);
-        driver.findElement(By.cssSelector("input[name='gtin']")).clear();
-        driver.findElement(By.cssSelector("input[name='gtin']")).sendKeys(product.gtin);
-        driver.findElement(By.cssSelector("input[name='taric']")).clear();
-        driver.findElement(By.cssSelector("input[name='taric']")).sendKeys(product.taric);
-        driver.findElement(By.cssSelector("input[name='keywords']")).clear();
-        driver.findElement(By.cssSelector("input[name='keywords']")).sendKeys(product.keywords);
+        FindElements.findElementByInputName(driver, "name[en]").clear();
+        FindElements.findElementByInputName(driver, "name[en]").sendKeys(product.name);
+        FindElements.findElementByInputName(driver, "code").clear();
+        FindElements.findElementByInputName(driver, "code").sendKeys(product.code);
+        FindElements.findElementByInputName(driver, "sku").clear();
+        FindElements.findElementByInputName(driver, "sku").sendKeys(product.sku);
+        FindElements.findElementByInputName(driver, "mpn").clear();
+        FindElements.findElementByInputName(driver, "mpn").sendKeys(product.mpn);
+        FindElements.findElementByInputName(driver, "gtin").clear();
+        FindElements.findElementByInputName(driver, "gtin").sendKeys(product.gtin);
+        FindElements.findElementByInputName(driver, "taric").clear();
+        FindElements.findElementByInputName(driver, "taric").sendKeys(product.taric);
+        FindElements.findElementByInputName(driver, "keywords").clear();
+        FindElements.findElementByInputName(driver, "keywords").sendKeys(product.keywords);
 
         //dropdown
         WebElement dropdown = driver.findElement(By.cssSelector("select[name='manufacturer_id']"));
         Select oSelect = new Select(dropdown);
         oSelect.selectByIndex(1);
-
-
     }
 
     public static int generateRandomNum() {

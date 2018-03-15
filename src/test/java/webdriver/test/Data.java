@@ -29,5 +29,7 @@ public class Data {
     public static String password = "sasha";
     public static String confirmed_password = "sasha";
 
+    public static String usernameAdmin = "admin";
+    public static String passwordAdmin = "admin";
 
 }

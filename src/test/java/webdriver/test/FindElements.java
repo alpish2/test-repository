@@ -23,6 +23,14 @@ public class FindElements {
         return driver.findElement(By.cssSelector(selector));
     }
 
+    public static WebElement findElementByName(WebDriver driver, String name) {
+        return driver.findElement(By.name(name));
+    }
+
+    public static WebElement findElementByInputName(WebDriver driver, String name) {
+        return driver.findElement(By.cssSelector("input[name='" + name + "']"));
+    }
+
     public static List<WebElement> findOptionsSizeList(WebDriver driver) {
         return driver.findElements(By.name("options[Size]"));
     }
@@ -84,6 +92,18 @@ public class FindElements {
         return driver.findElement(By.cssSelector(selectorForCreateAccountButton));
     }
 
+    public static WebElement findEmailFieldInCreateAccountForm(WebDriver driver) {
+        return driver.findElement(By.cssSelector("div#box-create-account [name='email']"));
+    }
+
+    public static WebElement findPasswordFieldInCreateAccountForm(WebDriver driver) {
+        return driver.findElement(By.cssSelector("div#box-create-account [name='password']"));
+    }
+
+    public static WebElement findConfirmPasswordFieldInCreateAccountForm(WebDriver driver) {
+        return driver.findElement(By.cssSelector("div#box-create-account [name='confirmed_password']"));
+    }
+
     public static WebElement findCreateAccountButtonInForm(WebDriver driver) {
         return driver.findElement(By.name("create_account"));
     }
@@ -94,6 +114,14 @@ public class FindElements {
 
     public static WebElement findLogoutButtonInMenu(WebDriver driver) {
         return driver.findElement(By.cssSelector(selectorForLogOutAccountButton));
+    }
+
+    public static WebElement findUsernameFieldInMenu(WebDriver driver) {
+        return driver.findElement(By.cssSelector("ul.dropdown-menu [name='email']"));
+    }
+
+    public static WebElement findPasswordFieldInMenu(WebDriver driver) {
+        return driver.findElement(By.cssSelector("ul.dropdown-menu [name='password']"));
     }
 
     public static List<WebElement> findCountriesList(WebDriver driver) {
