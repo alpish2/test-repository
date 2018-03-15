@@ -19,7 +19,15 @@ public class SeleniumHomeworkTask12 extends DriverInitialization {
     @Test
     public void addNewProductCatalog() {
         String productName = "name" + LoginActions.generateRandomNum();
-        Product product = new Product(Data.dateFrom, Data.dateTo, productName, Data.code, Data.sku, Data.mpn, Data.gtin, Data.taric, Data.keywords);
+        Product product = new Product(Data.dateFrom,
+                Data.dateTo,
+                productName,
+                Data.code,
+                Data.sku,
+                Data.mpn,
+                Data.gtin,
+                Data.taric,
+                Data.keywords);
         initFFDriver();
         GetPageActions.getCatalogPage(driver);
         openNewProductPage(driver);
