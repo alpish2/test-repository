@@ -170,7 +170,6 @@ public class FindElements {
 
     public static WebElement findTitle(WebDriver driver) {
         return driver.findElement(By.cssSelector("h1"));
-
     }
 
     public static WebElement findCartQuantity(WebDriver driver) {
@@ -192,4 +191,22 @@ public class FindElements {
     public static List<WebElement> findEMelement(WebDriver driver) {
         return driver.findElements(By.cssSelector("em"));
     }
+
+    public static WebElement findCampaignPrice(WebElement div) {
+        return div.findElement(By.cssSelector("div.price-wrapper strong.campaign-price"));
+    }
+
+    public static WebElement findRegularPriceMainPAge(WebElement div) {
+        return div.findElement(By.cssSelector("div.price-wrapper s.regular-price"));
+    }
+
+    public static WebElement findRegularPriceProductPage(WebElement div) {
+        return div.findElement(By.cssSelector("div.price-wrapper del.regular-price"));
+    }
+
+    public static WebElement findElementProductPage(WebDriver driver) {
+        return driver.findElement(By.cssSelector("div.featherlight-content"));
+    }
+
+
 }

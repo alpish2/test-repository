@@ -22,8 +22,6 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         countries = FindElements.findCountriesList(driver);
         compareTitleBubbleSort(countries);
-
-
     }
 
     @Test
@@ -60,8 +58,9 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
             String firstElement = titles.get(i).getText();
             String secondElement = titles.get(i + 1).getText();
             Assert.assertTrue(secondElement.compareTo(firstElement) > 0);
-            System.out.println("first element " + firstElement + "is located before second element" + secondElement);
-
+            System.out.println("first element "
+                    + firstElement
+                    + "is located before second element" + secondElement);
         }
     }
 
@@ -72,7 +71,8 @@ public class SeleniumHomeworkTask9 extends DriverInitialization {
             if (zoneCountList.get(i).getText().compareTo("0") != 0) {
                 linksToZones.add(countryList.get(i).getAttribute("href"));
                 for (int j = 0; j < linksToZones.size(); j++) {
-                    System.out.println("INFO: Countries with zones!=0:  " + linksToZones.get(j));
+                    System.out.println("INFO: Countries with zones!=0:  "
+                            + linksToZones.get(j));
                 }
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

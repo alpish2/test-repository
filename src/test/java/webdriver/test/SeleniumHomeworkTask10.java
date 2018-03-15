@@ -19,48 +19,37 @@ public class SeleniumHomeworkTask10 extends DriverInitialization {
 
     @Test
     public void checkEquivalenceOfMainPageAndProductPage() {
-        List<WebElement> elementListMainPage;
+
         initFFDriver();
         GetPageActions.getMainPage(driver);
         WebElement mainPage = FindElements.findCampaignProductsTab(driver);
-        elementListMainPage = FindElements.findLinks(mainPage);
+        List<WebElement> elementListMainPage = FindElements.findLinks(mainPage);
         String titleMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.name")).getText();
-        System.out.println("Checking price appearance on the main page ...");
-        WebElement elementStrongPriceMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.price-wrapper strong.campaign-price"));
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("color"), "rgb(204, 0, 0)");
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("font-weight"), "700");
-        String strongPriceMainPage = elementStrongPriceMainPage.getText();
-        System.out.println("Color of price1 is red and bold");
+        WebElement elementStrongPriceMainPage = FindElements.findCampaignPrice(elementListMainPage.get(0));
 
-        WebElement elementRegularPriceMainPage = elementListMainPage.get(0).findElement(By.cssSelector("div.price-wrapper s.regular-price"));
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("color"), "rgb(51, 51, 51)");
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("text-decoration"), "line-through");
+        String strongPriceMainPage = elementStrongPriceMainPage.getText();
+
+        WebElement elementRegularPriceMainPage = FindElements.findRegularPriceMainPAge(elementListMainPage.get(0));
         String regularPriceMainPage = elementRegularPriceMainPage.getText();
-        System.out.println("Color of price2 is gray and crossed off");
 
         elementListMainPage.get(0).click();
         System.out.println("Product page opened");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement elementProductPage = driver.findElement(By.cssSelector("div.featherlight-content"));
-        String titleProductPage = elementProductPage.findElement(By.cssSelector("div.row h1.title")).getText();
-        System.out.println("Checking price appearance on the product page ...");
-        WebElement elementStrongPriceProductPage = elementProductPage.findElement(By.cssSelector("div.price-wrapper strong.campaign-price"));
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("color"), "rgb(204, 0, 0)");
-        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("font-weight"), "700");
-        String strongPriceProductPage = elementStrongPriceProductPage.getText();
-        System.out.println("Color of price1 is red and bold");
-        WebElement elementRegularPriceProductPage = elementProductPage.findElement(By.cssSelector("div.price-wrapper del.regular-price"));
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("color"), "rgb(51, 51, 51)");
-        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("text-decoration"), "line-through");
-        String regularPriceProductPage = elementRegularPriceProductPage.getText();
-        System.out.println("Color of price2 is gray and crossed off");
 
-        Assert.assertTrue(titleMainPage.equals(titleProductPage));
-        Assert.assertTrue(strongPriceMainPage.equals(strongPriceProductPage));
-        Assert.assertTrue(regularPriceMainPage.equals(regularPriceProductPage));
-        System.out.println("Titles are the same on main and product pages: " + titleMainPage + "/" + titleProductPage);
-        System.out.println("Price1 are the same on main and product pages: " + strongPriceMainPage + "/" + strongPriceProductPage);
-        System.out.println("Price2 are the same on main and product pages: " + regularPriceMainPage + "/" + regularPriceProductPage);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement elementProductPage = FindElements.findElementProductPage(driver);
+        WebElement elementStrongPriceProductPage = FindElements.findCampaignPrice(elementProductPage);
+        WebElement elementRegularPriceProductPage = FindElements.findRegularPriceProductPage(elementProductPage);
+
+        String titleProductPage = elementProductPage.findElement(By.cssSelector("div.row h1.title")).getText();
+        String strongPriceProductPage = elementStrongPriceProductPage.getText();
+        String regularPriceProductPage = elementRegularPriceProductPage.getText();
+
+
+        Asserts(regularPriceMainPage, strongPriceMainPage,
+                regularPriceProductPage, strongPriceProductPage,
+                titleMainPage, titleProductPage,
+                elementRegularPriceMainPage, elementStrongPriceMainPage);
+
     }
 
     @AfterClass
@@ -68,4 +57,26 @@ public class SeleniumHomeworkTask10 extends DriverInitialization {
         driver.quit();
     }
 
+
+    public void Asserts(String regularPriceMainPage, String strongPriceMainPage,
+                        String regularPriceProductPage, String strongPriceProductPage,
+                        String titleMainPage, String titleProductPage,
+                        WebElement elementRegularPriceMainPage, WebElement elementStrongPriceMainPage) {
+
+        Assert.assertTrue(titleMainPage.equals(titleProductPage));
+
+        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("color"), "rgb(204, 0, 0)");
+        Assert.assertEquals(elementStrongPriceMainPage.getCssValue("font-weight"), "700");
+        Assert.assertTrue(strongPriceMainPage.equals(strongPriceProductPage));
+        System.out.println("Color of price1 is red and bold");
+
+        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("color"), "rgb(51, 51, 51)");
+        Assert.assertEquals(elementRegularPriceMainPage.getCssValue("text-decoration"), "line-through");
+        Assert.assertTrue(regularPriceMainPage.equals(regularPriceProductPage));
+        System.out.println("Color of price2 is gray and crossed off");
+
+        System.out.println("Titles are the same on main and product pages: " + titleMainPage + "/" + titleProductPage);
+        System.out.println("Price1 are the same on main and product pages: " + strongPriceMainPage + "/" + strongPriceProductPage);
+        System.out.println("Price2 are the same on main and product pages: " + regularPriceMainPage + "/" + regularPriceProductPage);
+    }
 }

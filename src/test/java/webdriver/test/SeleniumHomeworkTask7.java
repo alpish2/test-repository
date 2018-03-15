@@ -19,14 +19,12 @@ public class SeleniumHomeworkTask7 extends DriverInitialization {
 
     @Test
     public void goTroughTheMenuAndCheckIfTitleExists() {
-        int menuListSize;
-        List<WebElement> menuList;
         initFFDriver();
         GetPageActions.getAdminPage(driver);
         LoginActions.loginAsAdminFromLoginPage(driver);
 
-        menuList = FindElements.findMenuList(driver);
-        menuListSize = menuList.size();
+        List<WebElement> menuList = FindElements.findMenuList(driver);
+        int menuListSize = menuList.size();
         handlingSubMenus(driver, menuListSize);
     }
 
