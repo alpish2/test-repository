@@ -19,12 +19,15 @@ import java.util.logging.Level;
 
 public class SeleniumHomeworkTask18 {
     public static WebDriver driver;
+    public static String localhostAddress = "localhost:" + Data.port;
 
     @Test
     public void checkIfProxyIsUsed() {
-        String link = "http://google.com";
-        initDriverWithProxy(link);
-        Assert.assertTrue(driver.getCurrentUrl().equals(link));
+
+        initDriverWithProxy(Data.linkToGoogle);
+        System.out.println("current -  " + driver.getCurrentUrl() + "   link used- " + Data.linkToGoogle);
+        Assert.assertTrue(driver.getCurrentUrl().equals(Data.linkToGoogle));
+
     }
 
     @AfterClass
@@ -35,7 +38,7 @@ public class SeleniumHomeworkTask18 {
     public static void initDriverWithProxy(String link) {
         ChromeOptions chromeOptions = new ChromeOptions();
         Proxy proxy = new Proxy();
-        proxy.setHttpProxy("localhost:8888");
+        proxy.setHttpProxy(localhostAddress);
         LoggingPreferences prefs = new LoggingPreferences();
         prefs.enable(LogType.BROWSER, Level.ALL);
         chromeOptions.setCapability("chromeDriver", true);

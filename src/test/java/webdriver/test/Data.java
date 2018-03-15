@@ -2,7 +2,15 @@ package webdriver.test;
 
 public class Data {
 
-    public static String localhostAddress = "http://localhost:8088/litecart";
+    public static String port = "8088";
+    public static String litecartAddress = "http://localhost:" + port + "/litecart";
+
+    //links
+    public static String adminPageLink = litecartAddress + "/admin/";
+    public static String mainPageLink = litecartAddress + "/en/";
+    public static String countriesPageLink = litecartAddress + "/admin/?app=countries&doc=countries";
+    public static String catalogPageLink = litecartAddress + "/admin/?app=catalog&doc=catalog";
+    public static String securityPageLink = litecartAddress + "/admin/?app=settings&doc=security";
 
     //new product info
     public static String dateFrom = "1991-01-01";
@@ -13,13 +21,6 @@ public class Data {
     public static String gtin = "123";
     public static String taric = "123";
     public static String keywords = "qwerty";
-
-    //links
-    public static String adminPageLink = localhostAddress + "/admin/";
-    public static String mainPageLink = localhostAddress + "/en/";
-    public static String countriesPageLink = localhostAddress + "/admin/?app=countries&doc=countries";
-    public static String catalogPageLink = localhostAddress + "/admin/?app=catalog&doc=catalog";
-    public static String securityPageLink = localhostAddress + "/admin/?app=settings&doc=security";
 
     //new user info
     public static String firstname = "sasha";
@@ -32,5 +33,5 @@ public class Data {
     public static String usernameAdmin = "admin";
     public static String passwordAdmin = "admin";
 
-
+    public static String linkToGoogle = "http://google.com/";
 }
